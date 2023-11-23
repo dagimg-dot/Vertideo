@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Vertideo</title>
+</head>
+
+<body>
+    <div id="video-list-container">
+        <div id="video-list">
+            <video id="video"></video>
+        </div>
+    </div>
+    <script src="lib/hammer.min.js"></script>
+    <script src="lib/jquery-1.9.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Array of video URLs
+            var videos = [
+                "./videos/VID_20220609_221123_320.mp4",
+                "./videos/VID_20220628_095355_217.mp4",
+                "./videos/VID_20220906_105552_297.mp4",
+                "./videos/VID_20230704_215840_678.mp4",
+                "./videos/VID_20220713_230946_044.mp4",
+                "./videos/VID_20221020_131400_911.mp4"
+            ];
+
+            var currentVideoIndex = 0;
+            var videoPlayer = document.getElementById("video");
+            var videoListContainer = document.getElementById("video-list-container");
+
+            // Load the first video
+            loadVideo(videos[currentVideoIndex]);
+
+            // Play the next video when the current video ends
+            videoPlayer.addEventListener("ended", function () {
+                currentVideoIndex++;
+                if (currentVideoIndex >= videos.length) {
+                    currentVideoIndex = 0;
+                }
+                loadVideo(videos[currentVideoIndex]);
+            });
+
+            // Load video function
+            function loadVideo(url) {
+                $("#loader").show();
+                videoPlayer.src = url;
+                videoPlayer.muted = true;
+                videoPlayer.load();
+                videoPlayer.addEventListener("loadeddata", function () {
+                    $("#loader").hide();
+                    videoPlayer.play();
+                });
+            }
+
+            // Scroll to change video
+            videoListContainer.addEventListener("wheel", function (e) {
+                e.preventDefault();
+                if (e.deltaY < 0) {
+                    currentVideoIndex--;
+                    if (currentVideoIndex < 0) {
+                        currentVideoIndex = videos.length - 1;
+                    }
+                } else {
+                    currentVideoIndex++;
+                    if (currentVideoIndex >= videos.length) {
+                        currentVideoIndex = 0;
+                    }
+                }
+                loadVideo(videos[currentVideoIndex]);
+            });
+
+            // Swipe to change video using Hammer.js library
+            var videoList = document.getElementById("video-list");
+            var hammer = new Hammer(videoList);
+            hammer.get("swipe").set({
+                direction: Hammer.DIRECTION_VERTICAL,
+            });
+            hammer.on("swipeup swipedown", function (e) {
+                if (e.type === "swipeup") {
+                    currentVideoIndex++;
+                    if (currentVideoIndex >= videos.length) {
+                        currentVideoIndex = 0;
+                    }
+                } else if (e.type === "swipedown") {
+                    currentVideoIndex--;
+                    if (currentVideoIndex < 0) {
+                        currentVideoIndex = videos.length - 1;
+                    }
+                }
+                loadVideo(videos[currentVideoIndex]);
+            });
+        });
+    </script>
+</body>
+
+</html>
