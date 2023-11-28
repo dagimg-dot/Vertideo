@@ -1,3 +1,4 @@
 .vscode/
 lib/
 assets/
+node_modules/
