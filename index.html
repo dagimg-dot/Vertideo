@@ -138,19 +138,36 @@
     <script src="index.js"></script>
     <script>
         $(document).ready(function () {
-            // Array of video URLs
-            var videos = [
+
+            // Test
+            const videosName = [
                 "./videos/VID_20220609_221123_320.mp4",
-                "./videos/VID_20220628_095355_217.mp4",
-                "./videos/VID_20220906_105552_297.mp4",
-                "./videos/VID_20230704_215840_678.mp4",
-                // "./videos/VID_20220713_230946_044.mp4",
                 "./videos/VID_20221020_131400_911.mp4",
-                // "http://192.168.1.4:8081/.Cache/.gradle/RDT_20231007_023954.mp4",
-                // "http://192.168.1.4:8081/.Cache/.gradle/RDT_20231007_015238.mp4",
-                // "http://192.168.1.4:8081/.Cache/.gradle/RDT_20231009_004821.mp4",
-                // "http://192.168.1.4:8081/.Cache/.gradle/RDT_20231007_021709.mp4"
-            ];
+                "./videos/VID_20220713_230946_044.mp4",
+                "./videos/VID_20221204_074934_207.mp4",
+                "./videos/VID_20220628_095355_217.mp4",
+                "./videos/VID_20230704_215840_678.mp4"
+            ]
+
+            const randomizeVideos = () => {
+                const getRand = () => Math.floor(Math.random() * videosName.length);
+
+                for (let i = 0; i < videosName.length; i++) {
+                    let rand = getRand()
+                    let rand2 = getRand()
+                    let temp = videosName[rand];
+                    videosName[rand] = videosName[rand2];
+                    videosName[rand2] = temp;
+                }
+            }
+
+            randomizeVideos()
+
+            // const videos = videosName.map((video) => {
+            //     return "http://192.168.1.5:8081/share/.cjx/" + video
+            // })
+
+            const videos = videosName
 
             var currentVideoIndex = 0;
             var videoPlayer = document.getElementById("video");
@@ -161,10 +178,6 @@
 
             // Play the next video when the current video ends
             videoPlayer.addEventListener("ended", function () {
-                // currentVideoIndex++;
-                // if (currentVideoIndex >= videos.length) {
-                //     currentVideoIndex = 0;
-                // }
                 loadVideo(videos[currentVideoIndex]);
             });
 
@@ -198,11 +211,9 @@
                 loadVideo(videos[currentVideoIndex]);
             });
 
-            // videoPlayer.addEventListener("seeking", () => console.log('seeking'))
-
             // Swipe to change video using Hammer.js library
             var videoList = document.getElementById("video-list");
-            var hammer = new Hammer(videoList);
+            var hammer = new Hammer(videoListContainer);
             hammer.get("swipe").set({
                 direction: Hammer.DIRECTION_VERTICAL,
             });
