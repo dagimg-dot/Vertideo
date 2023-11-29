@@ -113,6 +113,35 @@ class WScraper {
 
     return result;
   };
+
+  /**
+   *
+   * @param {Array} nodeArr
+   * @returns {Array} string []
+   *
+   * It is recommended to be as near as possible to the text of the node to eliminate unwanted results of white space and `&nbsp`
+   */
+  innerText(nodeArr) {
+    const result = [];
+
+    const finder = (_nodes) => {
+      for (let obj of _nodes) {
+        if (obj.data && !obj.children) {
+          result.push(obj.data);
+        } else {
+          if (obj.children) {
+            finder(obj.children);
+          } else {
+            continue;
+          }
+        }
+      }
+    };
+
+    finder(nodeArr);
+
+    return result;
+  }
 }
 
 export default WScraper;
