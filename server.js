@@ -8,3 +8,5 @@ const result1 = scraper.getElementsByTagName("li");
 const result2 = scraper.getElementsByClassName("filename");
 console.log(result1);
 console.log(result2);
+
+console.log(scraper.innerText(result1))
