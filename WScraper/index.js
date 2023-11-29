@@ -12,6 +12,7 @@ class WScraper {
     this.html = "";
     this.parsedHtml = null;
   }
+
   /**
    *
    * @param {string} str
@@ -29,7 +30,7 @@ class WScraper {
    * @returns {Array} Node []
    */
   async fromURL(url) {
-    await this.#fetchHTML(url);
+    this.html = await this.#fetchHTML(url);
     this.parsedHtml = this.#parser();
     return this.parsedHtml;
   }
@@ -37,9 +38,9 @@ class WScraper {
   /**
    * fetches html from the provided url
    */
-  async #fetchHTML() {
-    const response = await fetch(url);
-    this.html = await response.text();
+  async #fetchHTML(url) {
+    const body = await fetch(url).then((response) => response.text());
+    return body;
   }
 
   /**
