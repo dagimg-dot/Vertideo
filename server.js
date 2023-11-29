@@ -1,12 +1,17 @@
-import WScraper from "./WScraper/index.js";
-import bodyTest from "./test/testBody.js";
+import express from "express";
+import getIpAddress from "./utils/IPHandler.js";
 
-const scraper = new WScraper();
-scraper.fromStr(bodyTest);
+const app = express();
 
-const result1 = scraper.getElementsByTagName("li");
-const result2 = scraper.getElementsByClassName("filename");
-console.log(result1);
-console.log(result2);
+const PORT = 3000;
+const IP_ADDRESS = getIpAddress();
 
-console.log(scraper.innerText(result1))
+app.use(express.static("frontend"));
+
+app.get("/hello", (req, res) => {
+  res.json("hello");
+});
+
+app.listen(PORT, IP_ADDRESS, () => {
+  console.log(`Server listening on ${IP_ADDRESS} : ${PORT}`);
+});
