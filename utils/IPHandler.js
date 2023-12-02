@@ -7,7 +7,11 @@ const getIpAddress = () => {
     const addresses = interfaces["Wi-Fi"];
     for (let address of addresses) {
       if (address.family === "IPv4") {
-        return address.address;
+        if (address.address === "::1") {
+          break;
+        } else {
+          return address.address;
+        }
       }
     }
   }
