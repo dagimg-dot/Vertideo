@@ -1,8 +1,16 @@
-import WScraper from '../WScraper/index.js';
+import WScraper from "../WScraper/index.js";
 
 const scraper = new WScraper();
-await scraper.fromURL("http://192.168.1.5:8081/share/.cjx");
 
-const result = scraper.getElementsByTagName("div");
-console.log(result);
+try {
+  await scraper.fromURL("http://192.168.1.2:8082/share/assets");
+} catch (e) {
+  console.log(e);
+}
 
+try {
+  const result = scraper.getElementsByTagName("div");
+  console.log(result);
+} catch (error) {
+  console.log(error);
+}
