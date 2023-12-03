@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import htmlparser from "htmlparser";
-import { response } from "express";
 
 /**
  * Initalizes a new WScraper instance
