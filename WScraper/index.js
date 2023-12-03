@@ -39,8 +39,12 @@ class WScraper {
    * fetches html from the provided url
    */
   async #fetchHTML(url) {
-    const body = await fetch(url).then((response) => response.text());
-    return body;
+    fetch(url)
+      .then((response) => response.text())
+      .then((body) => body)
+      .catch(() => {
+        throw new Error("There is a problem in your connection");
+      });
   }
 
   /**
@@ -49,7 +53,7 @@ class WScraper {
    */
   #parser() {
     const handler = new htmlparser.DefaultHandler((error, dom) => {
-      if (error) throw new Error("error occurred while parsing");
+      if (error) throw new Error("Error occurred while parsing");
     });
 
     const parser = new htmlparser.Parser(handler);
