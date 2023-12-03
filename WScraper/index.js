@@ -46,7 +46,7 @@ class WScraper {
     try {
       const response = await fetch(url);
       const body = await response.text();
-      if (body.includes("404")) {
+      if (body.includes("404: Not found!")) {
         throw new Error("Page not found");
       }
       return body;
