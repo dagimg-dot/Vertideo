@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import htmlparser from "htmlparser";
+import { response } from "express";
 
 /**
  * Initalizes a new WScraper instance
@@ -30,21 +31,29 @@ class WScraper {
    * @returns {Array} Node []
    */
   async fromURL(url) {
-    this.html = await this.#fetchHTML(url);
-    this.parsedHtml = this.#parser();
-    return this.parsedHtml;
+    try {
+      this.html = await this.#fetchHTML(url);
+      this.parsedHtml = this.#parser();
+      return this.parsedHtml;
+    } catch (e) {
+      throw new Error(e.message);
+    }
   }
 
   /**
    * fetches html from the provided url
    */
   async #fetchHTML(url) {
-    fetch(url)
-      .then((response) => response.text())
-      .then((body) => body)
-      .catch(() => {
-        throw new Error("There is a problem in your connection");
-      });
+    try {
+      const response = await fetch(url);
+      const body = await response.text();
+      if (body.includes("404")) {
+        throw new Error("Page not found");
+      }
+      return body;
+    } catch (e) {
+      throw new Error(e.message);
+    }
   }
 
   /**
@@ -68,22 +77,25 @@ class WScraper {
    */
   getElementsByTagName = (tagName) => {
     const result = [];
-
-    const finder = (_nodes) => {
-      for (let obj of _nodes) {
-        if (obj.type === "tag" && obj.name && obj.name === tagName) {
-          result.push(obj);
-        } else {
-          if (obj.children) {
-            finder(obj.children);
+    try {
+      const finder = (_nodes) => {
+        for (let obj of _nodes) {
+          if (obj.type === "tag" && obj.name && obj.name === tagName) {
+            result.push(obj);
           } else {
-            continue;
+            if (obj.children) {
+              finder(obj.children);
+            } else {
+              continue;
+            }
           }
         }
-      }
-    };
+      };
 
-    finder(this.parsedHtml);
+      finder(this.parsedHtml);
+    } catch {
+      throw new Error("There is an error while finding the element");
+    }
 
     return result;
   };
@@ -95,27 +107,29 @@ class WScraper {
    */
   getElementsByClassName = (className) => {
     const result = [];
-
-    const finder = (_nodes) => {
-      for (let obj of _nodes) {
-        if (
-          obj.attribs &&
-          obj.attribs.class &&
-          obj.attribs.class === className
-        ) {
-          result.push(obj);
-        } else {
-          if (obj.children) {
-            finder(obj.children);
+    try {
+      const finder = (_nodes) => {
+        for (let obj of _nodes) {
+          if (
+            obj.attribs &&
+            obj.attribs.class &&
+            obj.attribs.class === className
+          ) {
+            result.push(obj);
           } else {
-            continue;
+            if (obj.children) {
+              finder(obj.children);
+            } else {
+              continue;
+            }
           }
         }
-      }
-    };
+      };
 
-    finder(this.parsedHtml);
-
+      finder(this.parsedHtml);
+    } catch {
+      throw new Error("There is an error while finding the element");
+    }
     return result;
   };
 
@@ -129,21 +143,25 @@ class WScraper {
   innerText(nodeArr) {
     const result = [];
 
-    const finder = (_nodes) => {
-      for (let obj of _nodes) {
-        if (obj.data && !obj.children) {
-          result.push(obj.data);
-        } else {
-          if (obj.children) {
-            finder(obj.children);
+    try {
+      const finder = (_nodes) => {
+        for (let obj of _nodes) {
+          if (obj.data && !obj.children) {
+            result.push(obj.data);
           } else {
-            continue;
+            if (obj.children) {
+              finder(obj.children);
+            } else {
+              continue;
+            }
           }
         }
-      }
-    };
+      };
 
-    finder(nodeArr);
+      finder(nodeArr);
+    } catch {
+      throw new Error("There is an error while extracting text");
+    }
 
     return result;
   }
