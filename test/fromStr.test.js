@@ -1,3 +1,5 @@
+import WScraper from "../WScraper/index.js";
+
 const bodyTest = `<html><body monica-version="2.8.0" monica-id="ofpnmcalabcbjgholdjcjblkibolbppb">
 <h3 class="directory">/share/.cjx/</h3>
 <h2 class="deviceName">Samsung SM-M127G<br>1.08 GiB / 29.11 GiB</h2><br>
@@ -11,4 +13,8 @@ const bodyTest = `<html><body monica-version="2.8.0" monica-id="ofpnmcalabcbjgho
 <br>
 <div id="monica-content-root" class="monica-widget" data-darkreader-mode="dynamic" data-darkreader-scheme="dark"><meta name="darkreader" content="5d03760346594ad01b9a20e6d02c27ce"></div></body></html>`;
 
-export default bodyTest;
+const scraper = new WScraper();
+scraper.fromStr(bodyTest);
+
+const result = scraper.getElementsByTagName("div");
+console.log(result);
