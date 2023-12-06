@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Actions from "./Actions";
 
 const VideoPlayer = ({ id, author, src }) => {
   const [playing, setPlaying] = useState(false);
@@ -19,7 +20,8 @@ const VideoPlayer = ({ id, author, src }) => {
         controls={false}
         ref={video}
         onClick={handlePlay}
-      ></video>
+      />
+      <Actions />
     </div>
   );
 };
