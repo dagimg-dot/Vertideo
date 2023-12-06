@@ -3,17 +3,22 @@ import VideoPlayer from "./VideoPlayer";
 const Videos = [
   {
     id: 1,
-    author: "penelope",
+    folder: "assets",
     src: "../../src/assets/video.mp4",
   },
   {
     id: 2,
-    author: "penelope",
+    folder: "assets",
     src: "../../src/assets/video.mp4",
   },
   {
     id: 3,
-    author: "penelope",
+    folder: "assets",
+    src: "../../src/assets/video.mp4",
+  },
+  {
+    id: 4,
+    folder: "assets",
     src: "../../src/assets/video.mp4",
   },
 ];
@@ -21,7 +26,7 @@ const Videos = [
 const VideoFeed = () => {
   return Videos.map((video) => {
     return (
-      <div key={video.id} className="w-full h-full snap-center">
+      <div key={video.id} className="w-full h-full snap-center scroll-smooth">
         <VideoPlayer {...video} />
       </div>
     );
