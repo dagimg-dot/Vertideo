@@ -9,7 +9,7 @@ const Videos = [
   {
     id: 2,
     folder: "assets",
-    src: "../../src/assets/video.mp4",
+    src: "../../src/assets/vvideo.mp4",
   },
   {
     id: 3,
@@ -19,7 +19,7 @@ const Videos = [
   {
     id: 4,
     folder: "assets",
-    src: "../../src/assets/video.mp4",
+    src: "../../src/assets/vvideo.mp4",
   },
 ];
 
