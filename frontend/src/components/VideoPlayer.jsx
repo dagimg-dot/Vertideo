@@ -11,7 +11,7 @@ const VideoPlayer = ({ id, author, src }) => {
   };
 
   return (
-    <div className="relative height-[inherit]">
+    <div className="relative h-[inherit]">
       <video
         className="w-full h-full object-contain"
         src={src}
