@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import Actions from "./Actions";
+import VideoDescription from "./VideoDescription";
 
-const VideoPlayer = ({ id, author, src }) => {
+const VideoPlayer = ({ folder, src }) => {
   const [playing, setPlaying] = useState(false);
   const video = useRef(null);
 
@@ -22,6 +23,7 @@ const VideoPlayer = ({ id, author, src }) => {
         onClick={handlePlay}
       />
       <Actions />
+      <VideoDescription description={{ folder, src }} />
     </div>
   );
 };
