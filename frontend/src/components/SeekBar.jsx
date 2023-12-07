@@ -1,6 +1,14 @@
 const SeekBar = ({ className, value, onChange, currentTime, duration }) => {
   return (
     <div className={className}>
+      <div className="flex justify-between text-sm">
+        {currentTime.minutes ? (
+          <div>{`${currentTime.minutes}:${currentTime.seconds}`}</div>
+        ) : (
+          "00:00"
+        )}
+        <div>{`${duration.minutes}:${duration.seconds}`}</div>
+      </div>
       <input
         type="range"
         min={0}
@@ -9,15 +17,8 @@ const SeekBar = ({ className, value, onChange, currentTime, duration }) => {
         onChange={onChange}
         style={{ width: "100%" }}
         step={1}
+        className=" rounded-none"
       />
-      <div className="flex justify-between">
-        {currentTime.minutes ? (
-          <div>{`${currentTime.minutes}:${currentTime.seconds}`}</div>
-        ) : (
-          "00:00"
-        )}
-        <div>{`${duration.minutes}:${duration.seconds}`}</div>
-      </div>
     </div>
   );
 };
