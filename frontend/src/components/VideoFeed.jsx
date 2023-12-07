@@ -4,17 +4,17 @@ const Videos = [
   {
     id: 1,
     folder: "assets",
-    src: "../../src/assets/video.mp4",
+    src: "../../src/assets/video3.mp4",
   },
   {
     id: 2,
     folder: "assets",
-    src: "../../src/assets/vvideo.mp4",
+    src: "../../src/assets/video.mp4",
   },
   {
     id: 3,
     folder: "assets",
-    src: "../../src/assets/video.mp4",
+    src: "../../src/assets/video3.mp4",
   },
   {
     id: 4,
