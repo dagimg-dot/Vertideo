@@ -17,7 +17,6 @@ const SeekBar = ({ className, value, onChange, currentTime, duration }) => {
         onChange={onChange}
         style={{ width: "100%" }}
         step={1}
-        className=" rounded-none"
       />
     </div>
   );
