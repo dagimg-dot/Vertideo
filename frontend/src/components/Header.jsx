@@ -6,7 +6,7 @@ const Header = () => {
       <nav className="flex items-center gap-4 pointer-events-auto absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
         <a href="#">All</a>
         <Separator />
-        <a href="#">Favourites</a>
+        <a href="#">Favorites</a>
       </nav>
     </header>
   );
