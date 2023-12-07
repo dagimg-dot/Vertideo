@@ -1,3 +1,4 @@
+import FooterMenu from "./components/FooterMenu";
 import Header from "./components/Header";
 import VideoFeed from "./components/VideoFeed";
 
@@ -8,6 +9,7 @@ const App = () => {
       <main className="h-full w-full aspect-[9/16] rounded-tr-md rounded-tl-md overflow-y-scroll snap-y snap-mandatory block relative">
         <VideoFeed />
       </main>
+    <FooterMenu />
     </div>
   );
 };
