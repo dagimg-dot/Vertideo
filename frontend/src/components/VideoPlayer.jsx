@@ -20,9 +20,8 @@ const VideoPlayer = ({ folder, src }) => {
   const handleChange = (event) => {
     const { current: videoElement } = video;
     videoElement.currentTime =
-      videoElement.duration / (100 / event.target.value);
+      (videoElement.duration * event.target.value) / 100;
 
-    console.log(videoElement.currentTime);
     setPosition(event.target.value);
   };
 
@@ -43,7 +42,6 @@ const VideoPlayer = ({ folder, src }) => {
 
   const handleTimeUpdate = (event) => {
     const { current: videoElement } = video;
-    setDuration(videoElement.duration);
     const inputPosition = Math.floor(
       (event.target.currentTime / videoElement.duration) * 100
     );
@@ -51,6 +49,35 @@ const VideoPlayer = ({ folder, src }) => {
     setCurrentTime(currentTime);
     setPosition(inputPosition);
   };
+
+  const handleMetaData = () => {
+    setDuration(formatTime(video.current.duration));
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.current.play();
+        } else {
+          video.current.pause();
+        }
+      },
+      {
+        threshold: 1.0,
+      }
+    );
+
+    if (video.current) {
+      observer.observe(video.current);
+    }
+
+    return () => {
+      if (video.current) {
+        observer.unobserve(video.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="relative h-[inherit]">
@@ -62,7 +89,7 @@ const VideoPlayer = ({ folder, src }) => {
         ref={video}
         onClick={handlePlay}
         onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={() => setDuration(formatTime(video.current.duration))}
+        onLoadedMetadata={handleMetaData}
       />
       <Actions />
       <VideoDescription description={{ folder, src }} />
