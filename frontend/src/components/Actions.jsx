@@ -18,14 +18,14 @@ const Actions = ({
       <div className="mt-[20px]">
         <button
           onClick={handleLike}
-          className="text-white flex flex-col justify-center items-center mb-[8px] bg-transparent border-none"
+          className="text-white flex flex-col justify-center items-center mb-[8px] bg-transparent border-none stroke-gray-300"
         >
           <Heart width={45} fill="white" />
           <span title="like">{likes}</span>
         </button>
         <button
           onClick={handleShare}
-          className="text-white flex flex-col justify-center items-center mb-[8px] bg-transparent border-none"
+          className="text-white flex flex-col justify-center items-center mb-[8px] bg-transparent border-none stroke-gray-300"
         >
           <Share width={45} />
           <span title="share">{shares}</span>
