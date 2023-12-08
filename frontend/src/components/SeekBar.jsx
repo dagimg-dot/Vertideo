@@ -5,9 +5,13 @@ const SeekBar = ({ className, value, onChange, currentTime, duration }) => {
         {currentTime.minutes ? (
           <div>{`${currentTime.minutes}:${currentTime.seconds}`}</div>
         ) : (
-          "00:00"
+          <div>00:00</div>
         )}
-        <div>{`${duration.minutes}:${duration.seconds}`}</div>
+        {duration.minutes ? (
+          <div>{`${duration.minutes}:${duration.seconds}`}</div>
+        ) : (
+          <div>00:00</div>
+        )}
       </div>
       <input
         type="range"
