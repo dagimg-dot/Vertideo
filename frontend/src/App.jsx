@@ -1,16 +1,15 @@
-import FooterMenu from "./components/FooterMenu";
-import Header from "./components/Header";
-import VideoFeed from "./components/VideoFeed";
+import { Route, Routes } from "react-router-dom";
+import Feed from "./pages/Feed";
+import Provider from "./pages/Provider";
+import Search from "./pages/Search";
 
 const App = () => {
   return (
-    <div className="w-screen h-screen flex flex-col place-content-center overflow-hidden">
-      <Header />
-      <main className="h-full w-full aspect-[9/16] rounded-tr-md rounded-tl-md overflow-y-scroll snap-y snap-mandatory block relative">
-        <VideoFeed />
-      </main>
-    <FooterMenu />
-    </div>
+    <Routes>
+      <Route path="/" element={<Feed />} />
+      <Route path="/provider" element={<Provider />} />
+      <Route path="/search" element={<Search />} />
+    </Routes>
   );
 };
 
