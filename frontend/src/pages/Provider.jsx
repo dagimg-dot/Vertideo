@@ -11,14 +11,14 @@ const Provider = () => {
 
   return (
     <Default>
-      <div className="flex flex-col px-4">
+      <div className="flex flex-col px-4 h-full">
         <main className="flex-grow">main</main>
         {isOpen && <AddProviderModal onClick={handleAddClick} />}
-        <div className="mb-14 flex">
+        <div className="flex">
           <div className="flex-grow"></div>
           <button
             className="px-4 py-4 bg-black rounded-lg mb-4"
-            onClick={handleAddClick}
+            onClick={() => setOpen(true)}
           >
             <Add />
           </button>
