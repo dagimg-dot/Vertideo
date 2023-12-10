@@ -92,10 +92,10 @@ const VideoPlayer = ({ folder, src }) => {
         onLoadedMetadata={handleMetaData}
       />
       <Actions />
-      <div className="absolute bottom-0 w-full h-52 bg-gradient-to-t from-slate-950 to-transparent"></div>
+      <div className="absolute bottom-0 w-full h-52 bg-gradient-to-t from-black to-transparent"></div>
       <VideoDescription description={{ folder, src }} />
       <SeekBar
-        className={"absolute bottom-14 px-3 w-full accent-[white]"}
+        className={"absolute bottom-0 w-full accent-[white]"}
         value={position}
         onChange={handleChange}
         currentTime={currentTime}
