@@ -1,11 +1,10 @@
-import FooterMenu from "../components/FooterMenu"
+import FooterMenu from "../components/FooterMenu";
+
 const Default = ({ children }) => {
   return (
-    <div>
-      {children}
-      <div className="fixed bottom-0 w-full">
-        <FooterMenu />
-      </div>
+    <div className="flex flex-col h-screen">
+      <div className="flex-grow">{children}</div>
+      <FooterMenu />
     </div>
   );
 };
