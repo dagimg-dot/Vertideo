@@ -13,11 +13,20 @@
 }
 
 body {
-    background-color: rgb(24, 23, 23);
+    background-color: #101115;
     font-family: sans-serif;
     color: rgb(226, 225, 225);
 }
 
 input:focus {
     outline: none;
+}
+
+input[type=text] {
+    background-color: #181f21;
+    border: 2px solid #bbb;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #bbb;
+    margin-top: 6px;
 }
