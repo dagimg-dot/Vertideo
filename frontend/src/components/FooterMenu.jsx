@@ -9,7 +9,7 @@ const FooterMenu = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between w-full bg-black px-4">
+    <nav className="flex items-center justify-between w-full bg-[#101115] px-4 border-t-2 border-[#181f21]">
       <Link to="/provider" className="flex items-center justify-center p-3">
         <ProviderIcon color={"white"} solid={makeSolid("/provider")} />
       </Link>
