@@ -27,7 +27,9 @@ const Provider = () => {
           </div>
           <div className="flex flex-col gap-4">
             {providers.length !== 0 ? (
-              providers.map((provider) => <ProviderCard key={provider.folderName} {...provider} />)
+              providers.map((provider) => (
+                <ProviderCard key={provider.folderName} {...provider} />
+              ))
             ) : (
               <div>You have no providers !</div>
             )}
