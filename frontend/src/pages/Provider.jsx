@@ -1,8 +1,9 @@
 import Default from "../layouts/Default";
 import { Add } from "../components/Icons/ProviderIcons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AddProviderModal from "../components/AddProviderModal";
 import ProviderCard from "../components/ProviderCard";
+import { GlobalContext } from "../store/store";
 
 const Provider = () => {
   const [isOpen, setOpen] = useState(false);
@@ -10,13 +11,7 @@ const Provider = () => {
     setOpen(!isOpen);
   };
 
-  const providers = [
-    { folderName: "Videos", URL: "192.168.1.5:8081" },
-    { folderName: "Assets", URL: "192.168.1.5:8081" },
-    { folderName: "Gallery", URL: "192.168.1.5:8081" },
-    { folderName: "Trailers", URL: "192.168.1.5:8081" },
-    { folderName: "Snapchat", URL: "192.168.1.5:8081" },
-  ];
+  const { providers } = useContext(GlobalContext);
 
   return (
     <Default>
@@ -28,7 +23,7 @@ const Provider = () => {
           <div className="flex flex-col gap-4">
             {providers.length !== 0 ? (
               providers.map((provider) => (
-                <ProviderCard key={provider.folderName} {...provider} />
+                <ProviderCard key={provider.id} {...provider} />
               ))
             ) : (
               <div>You have no providers !</div>
