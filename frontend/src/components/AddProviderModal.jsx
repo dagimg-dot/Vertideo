@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { GlobalContext } from "../store/store";
 
 const AddProviderModal = ({ onClick }) => {
   const [hostname, setHostname] = useState("");
   const [port, setPort] = useState("");
   const [foldername, setFoldername] = useState("");
 
+  const { AddProvider } = useContext(GlobalContext);
+
   const handleSaveClick = (event) => {
     event.preventDefault();
     const formData = { hostname, port, foldername };
-    console.log(formData);
+
+    AddProvider(formData);
+
+    onClick();
   };
 
   return (
