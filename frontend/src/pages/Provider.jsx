@@ -7,7 +7,7 @@ import { GlobalContext } from "../store/store";
 
 const Provider = () => {
   const [isOpen, setOpen] = useState(false);
-  const handleAddClick = () => {
+  const toggleModal = () => {
     setOpen(!isOpen);
   };
 
@@ -30,7 +30,7 @@ const Provider = () => {
             )}
           </div>
         </main>
-        {isOpen && <AddProviderModal onClick={handleAddClick} />}
+        {isOpen && <AddProviderModal toggleModal={toggleModal} />}
         <div className="flex">
           <div className="flex-grow"></div>
           <button

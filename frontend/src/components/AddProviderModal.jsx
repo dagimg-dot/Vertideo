@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { GlobalContext } from "../store/store";
 
-const AddProviderModal = ({ onClick }) => {
+const AddProviderModal = ({ toggleModal }) => {
   const [hostname, setHostname] = useState("");
   const [port, setPort] = useState("");
   const [foldername, setFoldername] = useState("");
@@ -14,7 +14,7 @@ const AddProviderModal = ({ onClick }) => {
 
     AddProvider(formData);
 
-    onClick();
+    toggleModal();
   };
 
   return (
@@ -53,7 +53,7 @@ const AddProviderModal = ({ onClick }) => {
         <div className="flex justify-between mt-6">
           <button
             className=" border-2 border-[#bbb] px-4 py-2 rounded-lg"
-            onClick={onClick}
+            onClick={toggleModal}
           >
             Cancel
           </button>
