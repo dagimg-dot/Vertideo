@@ -30,3 +30,25 @@ input[type=text] {
     color: #bbb;
     margin-top: 6px;
 }
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 15rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: white;
+    height: 0.4rem;
+    width: 10px;
+    border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: #181f21;
+    height: 0.4rem;
+}
