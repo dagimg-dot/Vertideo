@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-const ProviderCard = ({ foldername, hostname, port }) => {
+const ProviderCard = ({ id, foldername, hostname, port }) => {
   const [isHidden, setIsHidden] = useState(true);
+  const DML = useRef(null);
 
-  const handleCardClick = () => {
-    setIsHidden(!isHidden);
+  const handleCardClick = (event) => {
+    if (event.target.parentNode !== DML.current) {
+      setIsHidden(!isHidden);
+    }
   };
 
   const getDots = (str) => {
@@ -29,7 +32,7 @@ const ProviderCard = ({ foldername, hostname, port }) => {
             : constructURL(hostname, port)}
         </span>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2" ref={DML}>
         <button>Edit</button>
         <button>Delete</button>
       </div>
