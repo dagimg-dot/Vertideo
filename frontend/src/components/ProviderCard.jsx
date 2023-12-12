@@ -1,13 +1,27 @@
 import { useRef, useState } from "react";
+import AddProviderModal from "./AddProviderModal";
 
 const ProviderCard = ({ id, foldername, hostname, port }) => {
   const [isHidden, setIsHidden] = useState(true);
+  const [isOpen, setOpen] = useState(false);
+
   const DML = useRef(null);
 
   const handleCardClick = (event) => {
     if (event.target.parentNode !== DML.current) {
       setIsHidden(!isHidden);
     }
+  };
+
+  const formData = {
+    id,
+    hostname,
+    foldername,
+    port,
+  };
+
+  const handleEditClick = () => {
+    setOpen(true);
   };
 
   const getDots = (str) => {
@@ -33,9 +47,15 @@ const ProviderCard = ({ id, foldername, hostname, port }) => {
         </span>
       </div>
       <div className="flex gap-2" ref={DML}>
-        <button>Edit</button>
+        <button onClick={handleEditClick}>Edit</button>
         <button>Delete</button>
       </div>
+      {isOpen && (
+        <AddProviderModal
+          toggleModal={() => setOpen(false)}
+          formData={formData}
+        />
+      )}
     </div>
   );
 };
