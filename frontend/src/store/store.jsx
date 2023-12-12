@@ -20,11 +20,16 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const EditProvider = (formData) => {
+    dispatch({ type: ACTIONS.EDIT_PROVIDER, payload: formData });
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         providers: state.providers,
         AddProvider,
+        EditProvider,
       }}
     >
       {children}
