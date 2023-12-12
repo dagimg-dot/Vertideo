@@ -1,5 +1,5 @@
 import Default from "../layouts/Default";
-import { Add } from "../components/Icons/ProviderIcons";
+import { AddIcon } from "../components/Icons/ProviderIcons";
 import { useContext, useState } from "react";
 import AddProviderModal from "../components/AddProviderModal";
 import ProviderCard from "../components/ProviderCard";
@@ -37,7 +37,7 @@ const Provider = () => {
             className="px-4 py-4 bg-[#bcfb08] rounded-lg mb-6"
             onClick={() => setOpen(true)}
           >
-            <Add />
+            <AddIcon />
           </button>
         </div>
       </div>
