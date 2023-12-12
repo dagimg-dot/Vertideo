@@ -1,30 +1,35 @@
 import VideoPlayer from "./VideoPlayer";
 import { Link } from "react-router-dom";
+import useVideos from "../hooks/useVideos";
 
-const Videos = [
-  {
-    id: 1,
-    folder: "assets",
-    src: "../../src/assets/video3.mp4",
-  },
-  {
-    id: 2,
-    folder: "assets",
-    src: "../../src/assets/video.mp4",
-  },
-  {
-    id: 3,
-    folder: "assets",
-    src: "../../src/assets/video3.mp4",
-  },
-  {
-    id: 4,
-    folder: "assets",
-    src: "../../src/assets/vvideo.mp4",
-  },
-];
+// Test
+
+// const Videos = [
+//   {
+//     id: 1,
+//     folder: "assets",
+//     src: "../../src/assets/video3.mp4",
+//   },
+//   {
+//     id: 2,
+//     folder: "assets",
+//     src: "../../src/assets/video.mp4",
+//   },
+//   {
+//     id: 3,
+//     folder: "assets",
+//     src: "../../src/assets/video3.mp4",
+//   },
+//   {
+//     id: 4,
+//     folder: "assets",
+//     src: "../../src/assets/vvideo.mp4",
+//   },
+// ];
 
 const VideoFeed = () => {
+  const Videos = useVideos();
+
   if (Videos.length !== 0) {
     return Videos.map((video) => {
       return (
