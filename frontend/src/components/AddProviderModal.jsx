@@ -28,6 +28,7 @@ const AddProviderModal = ({ toggleModal }) => {
             placeholder="192.168.1.5"
             className=" placeholder:opacity-40"
             onChange={(e) => setHostname(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -38,6 +39,7 @@ const AddProviderModal = ({ toggleModal }) => {
             placeholder="8081"
             className=" placeholder:opacity-40"
             onChange={(e) => setPort(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -48,6 +50,7 @@ const AddProviderModal = ({ toggleModal }) => {
             placeholder="Videos"
             className=" placeholder:opacity-40"
             onChange={(e) => setFoldername(e.target.value)}
+            required
           />
         </div>
         <div className="flex justify-between mt-6">
@@ -60,7 +63,6 @@ const AddProviderModal = ({ toggleModal }) => {
           <button
             type="submit"
             className="bg-[#bcfb08] text-[#101115] px-4 py-2 rounded-lg font-bold shadow-md shadow-[#181f21]"
-            onClick={handleSaveClick}
           >
             Save
           </button>
