@@ -1,7 +1,7 @@
 const SeekBar = ({ className, value, onChange, currentTime, duration }) => {
   return (
     <div className={className}>
-      <div className="flex justify-between text-sm">
+      <div className="flex justify-between text-sm px-2">
         {currentTime.minutes ? (
           <div>{`${currentTime.minutes}:${currentTime.seconds}`}</div>
         ) : (
