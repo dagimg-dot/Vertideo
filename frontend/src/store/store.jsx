@@ -24,12 +24,17 @@ export const GlobalProvider = ({ children }) => {
     dispatch({ type: ACTIONS.EDIT_PROVIDER, payload: formData });
   };
 
+  const DeleteProvider = (id) => {
+    dispatch({ type: ACTIONS.DELETE_PROVIDER, payload: id });
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         providers: state.providers,
         AddProvider,
         EditProvider,
+        DeleteProvider,
       }}
     >
       {children}

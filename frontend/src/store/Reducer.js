@@ -19,6 +19,14 @@ const Reducer = (state, action) => {
         ...state,
         providers: [...state.providers],
       };
+
+    case ACTIONS.DELETE_PROVIDER:
+      return {
+        ...state,
+        providers: state.providers.filter(
+          (provider) => provider.id !== action.payload
+        ),
+      };
   }
 };
 

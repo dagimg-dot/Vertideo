@@ -1,17 +1,13 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import AddProviderModal from "./AddProviderModal";
+import { GlobalContext } from "../store/store";
 
 const ProviderCard = ({ id, foldername, hostname, port }) => {
   const [isHidden, setIsHidden] = useState(true);
   const [isOpen, setOpen] = useState(false);
-
   const DML = useRef(null);
 
-  const handleCardClick = (event) => {
-    if (event.target.parentNode !== DML.current) {
-      setIsHidden(!isHidden);
-    }
-  };
+  const { DeleteProvider } = useContext(GlobalContext);
 
   const formData = {
     id,
@@ -20,9 +16,19 @@ const ProviderCard = ({ id, foldername, hostname, port }) => {
     port,
   };
 
+  const handleCardClick = (event) => {
+    if (event.target.parentNode !== DML.current) {
+      setIsHidden(!isHidden);
+    }
+  };
+
   const handleEditClick = () => {
     setOpen(true);
   };
+
+  const handleDeleteClick = () => {
+    DeleteProvider(id)
+  }
 
   const getDots = (str) => {
     return str.split("").map((s) => "•");
@@ -48,7 +54,7 @@ const ProviderCard = ({ id, foldername, hostname, port }) => {
       </div>
       <div className="flex gap-2" ref={DML}>
         <button onClick={handleEditClick}>Edit</button>
-        <button>Delete</button>
+        <button onClick={handleDeleteClick}>Delete</button>
       </div>
       {isOpen && (
         <AddProviderModal
