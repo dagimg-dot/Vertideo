@@ -14,7 +14,7 @@ const Actions = ({
   };
 
   return (
-    <aside className="flex flex-col items-center absolute bottom-[180px] right-[13px]">
+    <aside className="flex flex-col items-center absolute bottom-[150px] right-[13px]">
       <div className="mt-[20px]">
         <button
           onClick={handleLike}
