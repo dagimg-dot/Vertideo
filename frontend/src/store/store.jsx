@@ -1,13 +1,10 @@
 import { createContext, useReducer } from "react";
 import { ACTIONS } from "../utils/types";
 import Reducer from "./Reducer";
+import randomIdGenerator from "../utils/randomIdGenerator";
 
 const initialState = {
   providers: [],
-};
-
-const generateRandomID = () => {
-  return Math.floor(Math.random() * 1000000);
 };
 
 export const GlobalContext = createContext(initialState);
@@ -16,9 +13,10 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
   const AddProvider = (formData) => {
+    const id = randomIdGenerator();
     dispatch({
       type: ACTIONS.ADD_PROVIDER,
-      payload: { id: generateRandomID(), ...formData },
+      payload: { id: id, ...formData },
     });
   };
 
