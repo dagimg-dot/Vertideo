@@ -3,7 +3,13 @@ import Default from "../layouts/Default";
 const Search = () => {
   return (
     <Default>
-      <h2>Search</h2>
+      <div className="px-4 my-4">
+        <input
+          type="text"
+          className="w-full placeholder:opacity-40"
+          placeholder="Seach your videos . . ."
+        />
+      </div>
     </Default>
   );
 };
