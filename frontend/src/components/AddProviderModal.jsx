@@ -1,18 +1,23 @@
 import { useContext, useState } from "react";
 import { GlobalContext } from "../store/store";
 
-const AddProviderModal = ({ toggleModal }) => {
-  const [hostname, setHostname] = useState("");
-  const [port, setPort] = useState("");
-  const [foldername, setFoldername] = useState("");
+const AddProviderModal = ({ toggleModal, formData }) => {
+  const [hostname, setHostname] = useState(formData?.hostname || "");
+  const [port, setPort] = useState(formData?.port || "");
+  const [foldername, setFoldername] = useState(formData?.foldername || "");
 
-  const { AddProvider } = useContext(GlobalContext);
+  const { AddProvider, EditProvider } = useContext(GlobalContext);
 
   const handleSaveClick = (event) => {
     event.preventDefault();
-    const formData = { hostname, port, foldername };
+    const newFormData = { hostname, port, foldername };
 
-    AddProvider(formData);
+    if (formData?.id) {
+      const id = formData.id;
+      EditProvider({ id, ...newFormData });
+    } else {
+      AddProvider(newFormData);
+    }
 
     toggleModal();
   };
