@@ -1,6 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import AddProviderModal from "./AddProviderModal";
 import { GlobalContext } from "../store/store";
+import { DeleteIcon, EditIcon } from "./Icons/ProviderIcons";
 
 const ProviderCard = ({ id, foldername, hostname, port }) => {
   const [isHidden, setIsHidden] = useState(true);
@@ -27,8 +28,8 @@ const ProviderCard = ({ id, foldername, hostname, port }) => {
   };
 
   const handleDeleteClick = () => {
-    DeleteProvider(id)
-  }
+    DeleteProvider(id);
+  };
 
   const getDots = (str) => {
     return str.split("").map((s) => "•");
@@ -52,9 +53,13 @@ const ProviderCard = ({ id, foldername, hostname, port }) => {
             : constructURL(hostname, port)}
         </span>
       </div>
-      <div className="flex gap-2" ref={DML}>
-        <button onClick={handleEditClick}>Edit</button>
-        <button onClick={handleDeleteClick}>Delete</button>
+      <div className="flex gap-4" ref={DML}>
+        <button onClick={handleEditClick}>
+          <EditIcon />
+        </button>
+        <button onClick={handleDeleteClick}>
+          <DeleteIcon />
+        </button>
       </div>
       {isOpen && (
         <AddProviderModal
