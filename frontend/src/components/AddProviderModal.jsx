@@ -14,7 +14,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
     }
     return false;
   };
-  
+
   const [formErrors, setFormErrors] = useState({});
   const [isDisabled, setDisabled] = useState(true);
 
@@ -58,13 +58,24 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
   };
 
   useEffect(() => {
-    if (
-      Object.keys(formErrors).length === 3 &&
-      Object.keys(formErrors).every((key) => formErrors[key] === "")
-    ) {
-      setDisabled(false);
+    if (isEditMode()) {
+      if (
+        Object.keys(formErrors).length > 0 &&
+        Object.keys(formErrors).every((key) => formErrors[key] === "")
+      ) {
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
     } else {
-      setDisabled(true);
+      if (
+        Object.keys(formErrors).length === 3 &&
+        Object.keys(formErrors).every((key) => formErrors[key] === "")
+      ) {
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
     }
   }, [formErrors]);
 
