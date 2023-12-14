@@ -1,5 +1,5 @@
-import fetch from "node-fetch";
 import htmlparser from "htmlparser";
+import fetchWithTimeout from "../utils/fetchWithTimeOut.js";
 
 /**
  * Initalizes a new WScraper instance
@@ -44,7 +44,7 @@ class WScraper {
    */
   async #fetchHTML(url) {
     try {
-      const response = await fetch(url);
+      const response = await fetchWithTimeout(url, 4000);
       const body = await response.text();
       if (body.includes("404: Not found!")) {
         throw new Error("Page not found");
