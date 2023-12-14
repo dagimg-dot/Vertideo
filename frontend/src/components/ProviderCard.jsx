@@ -64,7 +64,7 @@ const ProviderCard = ({ id, foldername, hostname, port }) => {
       {isOpen && (
         <AddProviderModal
           toggleModal={() => setOpen(false)}
-          formData={formData}
+          _formData={formData}
         />
       )}
     </div>
