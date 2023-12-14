@@ -18,7 +18,7 @@
 }
 
 .loader {
-    border: 1px solid white;
+    border: 3px solid #bcfb08;
     border-radius: 50%;
     border-right-color: transparent;
     border-bottom-color: transparent;
