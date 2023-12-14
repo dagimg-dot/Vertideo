@@ -1,6 +1,7 @@
 import Video from "../model/Video.js";
 
 const getVideos = async (req, res) => {
+  console.info("/videos accessed");
   const { url } = req.body;
   const video = new Video(url);
   try {
@@ -8,6 +9,7 @@ const getVideos = async (req, res) => {
     res.status(200).json({ data: videos });
   } catch (error) {
     res.status(500).json({ error: { message: error.message } });
+    console.error("Error:", error.message);
   }
 };
 
