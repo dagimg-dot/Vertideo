@@ -6,6 +6,11 @@ const getVideos = async (req, res) => {
   const video = new Video(url);
   try {
     const videos = await video.find();
+
+    if (videos.length === 0) {
+      throw new Error("the host you provided does not have videos");
+    }
+
     res.status(200).json({ data: videos });
   } catch (error) {
     res.status(500).json({ error: { message: error.message } });
