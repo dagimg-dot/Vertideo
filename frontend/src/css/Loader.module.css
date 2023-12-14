@@ -1,0 +1,73 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 360px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.loaderBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    height: 200px;
+    width: 200px;
+}
+
+.loader {
+    border: 1px solid white;
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    width: 80px;
+    height: 80px;
+    animation-name: loading;
+    animation-duration: 700ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.loaderText {
+    margin-top: 10px;
+    padding-top: 10px;
+    color: lightgrey;
+    font-size: 18px;
+    animation-name: fading;
+    animation-duration: 1500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.descriptionBox {
+    margin-top: 10px;
+    padding: 10px 5px 10px 5px;
+    font-size: 18px;
+    height: 35px;
+    line-height: 35px;
+    width: 500px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fading {
+    0%, 100% {
+        opacity: 0.05;
+    }
+
+    50% {
+        opacity: 0.95;
+    }
+}
