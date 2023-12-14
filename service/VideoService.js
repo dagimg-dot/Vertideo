@@ -11,15 +11,11 @@ const generateURL = (url, videoNameList) => {
 };
 
 const getAllVideos = async (url) => {
-  try {
-    await scraper.fromURL(url);
-    const result = scraper.getElementsByClassName("filename");
-    const extractedVideoNames = scraper.innerText(result);
-    const videoLinks = generateURL(url, extractedVideoNames);
-    return videoLinks;
-  } catch (error) {
-    console.log(error);
-  }
+  await scraper.fromURL(url);
+  const result = scraper.getElementsByClassName("filename");
+  const extractedVideoNames = scraper.innerText(result);
+  const videoLinks = generateURL(url, extractedVideoNames);
+  return videoLinks;
 };
 
 export { getAllVideos };
