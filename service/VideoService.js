@@ -15,7 +15,16 @@ const getAllVideos = async (url) => {
   const result = scraper.getElementsByClassName("filename");
   const extractedVideoNames = scraper.innerText(result);
   const videoLinks = generateURL(url, extractedVideoNames);
-  return videoLinks;
+
+  const videos = videoLinks.map((vid, idx) => {
+    return {
+      id: idx,
+      folder: vid.split("/")[4],
+      src: vid,
+    };
+  });
+
+  return videos;
 };
 
 export { getAllVideos };
