@@ -146,7 +146,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
             className="bg-[#bcfb08] text-[#101115] px-4 py-2 rounded-lg font-bold shadow-md shadow-[#181f21] disabled:bg-gray-300"
             disabled={isDisabled}
           >
-            Save
+            {isEditMode() ? "Update" : "Save"}
           </button>
         </div>
       </form>
