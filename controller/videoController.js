@@ -13,6 +13,11 @@ const getVideos = async (req, res) => {
 
     res.status(200).json({ data: videos });
   } catch (error) {
+    if (error.message.includes("ECONNREFUSED")) {
+      return res
+        .status(401)
+        .json({ error: { message: "request to host failed" } });
+    }
     res.status(500).json({ error: { message: error.message } });
     console.error("Error:", error.message);
   }
