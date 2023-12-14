@@ -2,6 +2,7 @@ import VideoPlayer from "./VideoPlayer";
 import { Link } from "react-router-dom";
 import useVideos from "../hooks/useVideos";
 import Loader from "./Loader";
+import { Error } from "./Icons/PlayerIcons";
 
 // Test
 
@@ -36,7 +37,12 @@ const VideoFeed = () => {
   }
 
   if (error !== "") {
-    return <div>{error}</div>;
+    return (
+      <div className="flex flex-col gap-4 w-full items-center justify-center mt-24">
+        <Error />
+        <span>{error}</span>
+      </div>
+    );
   }
 
   if (Videos.length !== 0) {
