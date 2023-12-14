@@ -8,6 +8,13 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
     foldername: _formData?.foldername || "",
   });
 
+  const isEditMode = () => {
+    if (_formData?.id) {
+      return true;
+    }
+    return false;
+  };
+  
   const [formErrors, setFormErrors] = useState({});
   const [isDisabled, setDisabled] = useState(true);
 
@@ -64,7 +71,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
   const handleSaveClick = (event) => {
     event.preventDefault();
 
-    if (_formData?.id) {
+    if (isEditMode()) {
       const id = _formData.id;
       EditProvider({ id, ...formData });
     } else {
