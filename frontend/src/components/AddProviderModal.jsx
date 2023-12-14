@@ -55,7 +55,6 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
       Object.keys(formErrors).length === 3 &&
       Object.keys(formErrors).every((key) => formErrors[key] === "")
     ) {
-      console.log("I am here");
       setDisabled(false);
     } else {
       setDisabled(true);
