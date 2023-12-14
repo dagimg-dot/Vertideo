@@ -1,62 +1,121 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../store/store";
 
-const AddProviderModal = ({ toggleModal, formData }) => {
-  const [hostname, setHostname] = useState(formData?.hostname || "");
-  const [port, setPort] = useState(formData?.port || "");
-  const [foldername, setFoldername] = useState(formData?.foldername || "");
+const AddProviderModal = ({ toggleModal, _formData }) => {
+  const [formData, setFormData] = useState({
+    hostname: _formData?.hostname || "",
+    port: _formData?.port || "",
+    foldername: _formData?.foldername || "",
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isDisabled, setDisabled] = useState(true);
 
   const { AddProvider, EditProvider } = useContext(GlobalContext);
 
-  const handleSaveClick = (event) => {
-    event.preventDefault();
-    const newFormData = { hostname, port, foldername };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
 
-    if (formData?.id) {
-      const id = formData.id;
-      EditProvider({ id, ...newFormData });
-    } else {
-      AddProvider(newFormData);
+    validateField(name, value);
+  };
+
+  const validateField = (name, value) => {
+    let errorMessage = "";
+
+    if (!value) {
+      errorMessage = name[0].toUpperCase() + name.slice(1) + " required";
     }
 
+    if (name === "hostname" && !!value) {
+      const pattern = /\b(?:\d{1,3}\.){3}\d{1,3}\b/;
+
+      const matches = value.match(pattern);
+      if (!matches) errorMessage = "Invalid hostname";
+    }
+
+    if (name === "port" && !!value) {
+      const pattern = /\b(?:[1-9]\d{0,4}|[1-5]\d{4}|6[0-5][0-5][0-3][0-5])\b/;
+
+      const matches = value.match(pattern);
+      if (!matches) errorMessage = "Invalid port number";
+    }
+
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: errorMessage,
+    }));
+  };
+
+  useEffect(() => {
+    if (
+      Object.keys(formErrors).length === 3 &&
+      Object.keys(formErrors).every((key) => formErrors[key] === "")
+    ) {
+      console.log("I am here");
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [formErrors]);
+
+  const handleSaveClick = (event) => {
+    event.preventDefault();
+
+    if (_formData?.id) {
+      const id = _formData.id;
+      EditProvider({ id, ...formData });
+    } else {
+      AddProvider(formData);
+    }
     toggleModal();
+  };
+
+  const Error = ({ message }) => {
+    return <span className="text-red-500 text-sm">{message}</span>;
   };
 
   return (
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-6 bg-[#181f21] rounded-lg text-lg text-[#bbb] shadow-lg shadow-black">
       <form className="flex flex-col gap-4" onSubmit={handleSaveClick}>
         <div>
-          <label htmlFor="hostname">Hostname</label>
+          <label>Hostname</label>
           <input
             type="text"
-            value={hostname}
+            name="hostname"
+            value={formData.hostname}
             placeholder="192.168.1.5"
             className=" placeholder:opacity-40"
-            onChange={(e) => setHostname(e.target.value)}
-            required
+            onChange={handleChange}
           />
+          {formErrors.hostname && <Error message={formErrors.hostname} />}
         </div>
         <div>
-          <label htmlFor="port">Port</label>
+          <label>Port</label>
           <input
             type="text"
-            value={port}
+            name="port"
+            value={formData.port}
             placeholder="8081"
             className=" placeholder:opacity-40"
-            onChange={(e) => setPort(e.target.value)}
-            required
+            onChange={handleChange}
           />
+          {formErrors.port && <Error message={formErrors.port} />}
         </div>
         <div>
-          <label htmlFor="folder">Folder Name</label>
+          <label>Folder Name</label>
           <input
             type="text"
-            value={foldername}
+            name="foldername"
+            value={formData.foldername}
             placeholder="Videos"
             className=" placeholder:opacity-40"
-            onChange={(e) => setFoldername(e.target.value)}
-            required
+            onChange={handleChange}
           />
+          {formErrors.foldername && <Error message={formErrors.foldername} />}
         </div>
         <div className="flex justify-between mt-6">
           <button
@@ -67,7 +126,8 @@ const AddProviderModal = ({ toggleModal, formData }) => {
           </button>
           <button
             type="submit"
-            className="bg-[#bcfb08] text-[#101115] px-4 py-2 rounded-lg font-bold shadow-md shadow-[#181f21]"
+            className="bg-[#bcfb08] text-[#101115] px-4 py-2 rounded-lg font-bold shadow-md shadow-[#181f21] disabled:bg-gray-300"
+            disabled={isDisabled}
           >
             Save
           </button>
