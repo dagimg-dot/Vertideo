@@ -3,7 +3,9 @@ import { GlobalContext } from "../store/store";
 
 const useVideos = () => {
   const { providers } = useContext(GlobalContext);
-  const [Videoss, setVideos] = useState([]);
+  const [Videos, setVideos] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const fullUrlConstructor = (provider) => {
     return (
@@ -19,16 +21,27 @@ const useVideos = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await fetch("http://192.168.1.2:3000/api/videos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ url: fullUrlConstructor(providers[0]) }),
-      });
+      setLoading(true);
+      try {
+        const res = await fetch("http://192.168.1.2:3000/api/videos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ url: fullUrlConstructor(providers[0]) }),
+        });
+        const data = await res.json();
 
-      const data = await res.json();
-      setVideos(data.data);
+        if (data.error) {
+          throw new Error(data.error.message);
+        }
+
+        setVideos(data.data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     if (providers.length > 0) {
@@ -36,15 +49,7 @@ const useVideos = () => {
     }
   }, []);
 
-  const Videos = Videoss.map((vid, idx) => {
-    return {
-      id: idx,
-      folder: vid.split("/")[4],
-      src: vid,
-    };
-  });
-
-  return Videos;
+  return [isLoading, error, Videos];
 };
 
 export default useVideos;
