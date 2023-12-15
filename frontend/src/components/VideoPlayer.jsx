@@ -96,7 +96,7 @@ const VideoPlayer = ({ folder, src }) => {
       />
       <Actions />
       {!playing && (
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 opacity-80">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-80">
           <FeedIcon color={"white"} solid={true} className={"w-24 h-24"} />
         </div>
       )}
