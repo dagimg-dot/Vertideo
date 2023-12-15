@@ -60,14 +60,14 @@ export const SearchIcon = ({ color, solid }) => {
   );
 };
 
-export const FeedIcon = ({ color, solid }) => {
+export const FeedIcon = ({ color, solid, className }) => {
   if (solid) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill={color}
-        className="w-8 h-8"
+        className={className || "w-8 h-8"}
       >
         <path
           fillRule="evenodd"
