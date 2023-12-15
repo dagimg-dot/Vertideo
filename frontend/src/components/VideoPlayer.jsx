@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Actions from "./Actions";
 import VideoDescription from "./VideoDescription";
 import SeekBar from "./SeekBar";
+import { FeedIcon } from "./Icons/FooterMenuIcons";
 
 const VideoPlayer = ({ folder, src }) => {
   const [playing, setPlaying] = useState(false);
@@ -59,8 +60,10 @@ const VideoPlayer = ({ folder, src }) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           video.current.play();
+          setPlaying(true);
         } else {
           video.current.pause();
+          setPlaying(false);
         }
       },
       {
@@ -92,6 +95,11 @@ const VideoPlayer = ({ folder, src }) => {
         onLoadedMetadata={handleMetaData}
       />
       <Actions />
+      {!playing && (
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 opacity-80">
+          <FeedIcon color={"white"} solid={true} className={"w-24 h-24"} />
+        </div>
+      )}
       <div className="absolute bottom-0 w-full min-h-[180px] bg-gradient-to-t from-[#101115] to-transparent"></div>
       <VideoDescription description={{ folder, src }} />
       <SeekBar
