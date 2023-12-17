@@ -1,6 +1,21 @@
 import { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../store/store";
 
+const randomizeVideos = (Videos) => {
+  const randomizedVideos = [...Videos];
+  const getRand = () => Math.floor(Math.random() * randomizedVideos.length);
+
+  for (let i = 0; i < randomizedVideos.length; i++) {
+    let rand = getRand();
+    let rand2 = getRand();
+    let temp = randomizedVideos[rand];
+    randomizedVideos[rand] = randomizedVideos[rand2];
+    randomizedVideos[rand2] = temp;
+  }
+
+  return randomizedVideos;
+};
+
 const useVideos = () => {
   const { providers } = useContext(GlobalContext);
   const [Videos, setVideos] = useState([]);
@@ -23,7 +38,7 @@ const useVideos = () => {
     const fetchVideos = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://192.168.1.2:3000/api/videos", {
+        const res = await fetch("http://192.168.1.3:3000/api/videos", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -36,7 +51,9 @@ const useVideos = () => {
           throw new Error(data.error.message);
         }
 
-        setVideos(data.data);
+        const randomizedVides = randomizeVideos(data.data);
+
+        setVideos(randomizedVides);
       } catch (error) {
         setError(error.message);
       } finally {
