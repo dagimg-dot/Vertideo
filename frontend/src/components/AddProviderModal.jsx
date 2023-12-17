@@ -24,7 +24,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value.trim(),
     }));
 
     validateField(name, value);
