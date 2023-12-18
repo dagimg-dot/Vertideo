@@ -27,6 +27,20 @@ const Reducer = (state, action) => {
           (provider) => provider.id !== action.payload
         ),
       };
+
+    case ACTIONS.SAVE_VIDEOS:
+      const choosenProvider = state.providers.find(
+        (provider) => provider.id === action.payload.id
+      );
+
+      state.providers[state.providers.indexOf(choosenProvider)].videos = [
+        ...action.payload.videos,
+      ];
+
+      return {
+        ...state,
+        providers: [...state.providers],
+      };
   }
 };
 
