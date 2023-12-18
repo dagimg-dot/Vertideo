@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import useVideos from "../hooks/useVideos";
 import Loader from "./Loader";
 import { Error } from "./Icons/PlayerIcons";
+import { useContext } from "react";
+import { GlobalContext } from "../store/store";
 
 // Test
 
@@ -31,6 +33,7 @@ import { Error } from "./Icons/PlayerIcons";
 
 const VideoFeed = () => {
   const [isLoading, error, Videos] = useVideos();
+  const { providers } = useContext(GlobalContext);
 
   if (isLoading) {
     return <Loader message={"Fetching your videos..."} />;
@@ -45,8 +48,8 @@ const VideoFeed = () => {
     );
   }
 
-  if (Videos.length !== 0) {
-    return Videos.map((video) => {
+  if (providers.length !== 0) {
+    return providers[0].videos.map((video) => {
       return (
         <div key={video.id} className="w-full h-full snap-center scroll-smooth">
           <VideoPlayer {...video} />
