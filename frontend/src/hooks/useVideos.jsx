@@ -17,7 +17,7 @@ const randomizeVideos = (Videos) => {
 };
 
 const useVideos = () => {
-  const { providers } = useContext(GlobalContext);
+  const { providers, SaveVideos } = useContext(GlobalContext);
   const [Videos, setVideos] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -38,7 +38,7 @@ const useVideos = () => {
     const fetchVideos = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://192.168.1.2:3000/api/videos", {
+        const res = await fetch("http://192.168.1.3:3000/api/videos", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -51,9 +51,10 @@ const useVideos = () => {
           throw new Error(data.error.message);
         }
 
-        const randomizedVides = randomizeVideos(data.data);
+        const randomizedVideos = randomizeVideos(data.data);
 
-        setVideos(randomizedVides);
+        setVideos(randomizedVideos);
+        SaveVideos({ id: providers[0].id, videos: randomizedVideos });
       } catch (error) {
         setError(error.message);
       } finally {
