@@ -4,7 +4,9 @@ import Reducer from "./Reducer";
 import randomIdGenerator from "../utils/randomIdGenerator";
 
 const initialState = {
-  providers: [],
+  providers: [
+    { hostname: "test", port: "test", foldername: "test", videos: [] },
+  ],
 };
 
 export const GlobalContext = createContext(initialState);
