@@ -16,16 +16,23 @@ export const GlobalProvider = ({ children }) => {
     const id = randomIdGenerator();
     dispatch({
       type: ACTIONS.ADD_PROVIDER,
-      payload: { id: id, ...formData },
+      payload: { id: id, ...formData, videos: [] },
     });
   };
 
   const EditProvider = (formData) => {
-    dispatch({ type: ACTIONS.EDIT_PROVIDER, payload: formData });
+    dispatch({
+      type: ACTIONS.EDIT_PROVIDER,
+      payload: { ...formData, videos: [] },
+    });
   };
 
   const DeleteProvider = (id) => {
     dispatch({ type: ACTIONS.DELETE_PROVIDER, payload: id });
+  };
+
+  const SaveVideos = ({ id, videos }) => {
+    dispatch({ type: ACTIONS.SAVE_VIDEOS, payload: { id, videos } });
   };
 
   return (
@@ -35,6 +42,7 @@ export const GlobalProvider = ({ children }) => {
         AddProvider,
         EditProvider,
         DeleteProvider,
+        SaveVideos,
       }}
     >
       {children}
