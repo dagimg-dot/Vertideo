@@ -35,6 +35,18 @@ const VideoFeed = () => {
   const [isLoading, error, Videos] = useVideos();
   const { providers } = useContext(GlobalContext);
 
+  const getAllVideos = () => {
+    let allVideos = [];
+
+    providers.map((provider) => {
+      if (provider.videos.length > 0) {
+        allVideos = [...allVideos, ...provider.videos];
+      }
+    });
+
+    return allVideos;
+  };
+
   if (isLoading) {
     return <Loader message={"Fetching your videos..."} />;
   }
@@ -49,12 +61,7 @@ const VideoFeed = () => {
   }
 
   if (providers.length !== 0) {
-    let allVideos = [];
-    providers.map((provider) => {
-      if (provider.videos.length > 0) {
-        allVideos = [...allVideos, ...provider.videos];
-      }
-    });
+    const allVideos = getAllVideos();
 
     return allVideos.map((video) => {
       return (
