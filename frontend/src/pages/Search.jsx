@@ -1,17 +1,30 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Default from "../layouts/Default";
 import { GlobalContext } from "../store/store";
 import { Link } from "react-router-dom";
 import VideoCard from "../components/VideoCard";
+import useSearch from "../hooks/useSearch";
 
 const Search = () => {
   const { providers } = useContext(GlobalContext);
+  const [videoList, setVideoList] = useState([]);
+  const [results, searchToken, setSearchToken] = useSearch(videoList);
+
+  useEffect(() => {
+    providers.forEach((provider) => {
+      if (provider.videos.length > 0) {
+        setVideoList([...provider.videos]);
+      }
+    });
+  }, [providers]);
 
   return (
     <Default>
       <div className="px-4 my-4">
         <input
           type="text"
+          value={searchToken}
+          onChange={(event) => setSearchToken(event.target.value)}
           className="w-full placeholder:opacity-40"
           placeholder="Search your videos . . ."
         />
@@ -26,7 +39,7 @@ const Search = () => {
         </div>
       ) : (
         <div className="flex flex-col gap-4 px-4 mt-10">
-          {providers[0].videos.map((video) => (
+          {results.map((video) => (
             <VideoCard key={video.id} {...video} />
           ))}
         </div>
