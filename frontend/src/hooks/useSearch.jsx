@@ -8,16 +8,16 @@ const useSearch = (videoList) => {
     return str.toLowerCase();
   };
 
+  const getName = (video) => {
+    return video.src.split("/").pop();
+  };
+
   useEffect(() => {
     const searchDoc = () => {
       let newResult = [];
       if (searchToken !== "") {
         videoList.forEach((video) => {
-          if (
-            lowerCase(video.src.split("/").pop()).includes(
-              lowerCase(searchToken)
-            )
-          ) {
+          if (lowerCase(getName(video)).includes(lowerCase(searchToken))) {
             newResult.push(video);
           }
         });
