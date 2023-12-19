@@ -13,10 +13,10 @@ const Search = () => {
   useEffect(() => {
     providers.forEach((provider) => {
       if (provider.videos.length > 0) {
-        setVideoList([...provider.videos]);
+        setVideoList(provider.videos);
       }
     });
-  }, [providers]);
+  }, []);
 
   return (
     <Default>
@@ -39,9 +39,9 @@ const Search = () => {
         </div>
       ) : (
         <div className="flex flex-col gap-4 px-4 mt-10">
-          {results.map((video) => (
-            <VideoCard key={video.id} {...video} />
-          ))}
+          {results.length === 0
+            ? videoList.map((video) => <VideoCard key={video.id} {...video} />)
+            : results.map((video) => <VideoCard key={video.id} {...video} />)}
         </div>
       )}
     </Default>

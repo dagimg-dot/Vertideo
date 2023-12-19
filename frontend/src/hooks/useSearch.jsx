@@ -11,7 +11,6 @@ const useSearch = (videoList) => {
   useEffect(() => {
     const searchDoc = () => {
       let newResult = [];
-      console.log(videoList);
       if (searchToken !== "") {
         videoList.forEach((video) => {
           if (
@@ -22,8 +21,6 @@ const useSearch = (videoList) => {
             newResult.push(video);
           }
         });
-      } else {
-        newResult = [...videoList];
       }
 
       setResults(newResult);
