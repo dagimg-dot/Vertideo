@@ -11,11 +11,13 @@ const Search = () => {
   const [results, searchToken, setSearchToken] = useSearch(videoList);
 
   useEffect(() => {
+    let newVideoList = [];
     providers.forEach((provider) => {
       if (provider.videos.length > 0) {
-        setVideoList(provider.videos);
+        newVideoList = [...newVideoList, ...provider.videos];
       }
     });
+    setVideoList(newVideoList);
   }, []);
 
   return (
@@ -38,10 +40,10 @@ const Search = () => {
           page and add at least one provider.
         </div>
       ) : (
-        <div className="flex flex-col gap-4 px-4 mt-10">
+        <div className="flex flex-col gap-4 px-4 my-10">
           {results.length === 0
-            ? videoList.map((video) => <VideoCard key={video.id} {...video} />)
-            : results.map((video) => <VideoCard key={video.id} {...video} />)}
+            ? videoList.map((video) => <VideoCard key={video.src} {...video} />)
+            : results.map((video) => <VideoCard key={video.src} {...video} />)}
         </div>
       )}
     </Default>
