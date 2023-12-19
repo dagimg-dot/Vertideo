@@ -49,9 +49,19 @@ const VideoFeed = () => {
   }
 
   if (providers.length !== 0) {
-    return providers[0].videos.map((video) => {
+    let allVideos = [];
+    providers.map((provider) => {
+      if (provider.videos.length > 0) {
+        allVideos = [...allVideos, ...provider.videos];
+      }
+    });
+
+    return allVideos.map((video) => {
       return (
-        <div key={video.id} className="w-full h-full snap-center scroll-smooth">
+        <div
+          key={video.src}
+          className="w-full h-full snap-center scroll-smooth"
+        >
           <VideoPlayer {...video} />
         </div>
       );
