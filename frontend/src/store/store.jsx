@@ -5,7 +5,7 @@ import randomIdGenerator from "../utils/randomIdGenerator";
 
 const initialState = {
   providers: [
-    { hostname: "test", port: "test", foldername: "test", videos: [] },
+    { id: 1, hostname: "test", port: "test", foldername: "test", videos: [] },
   ],
 };
 
