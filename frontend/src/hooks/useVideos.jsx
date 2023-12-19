@@ -23,6 +23,7 @@ const useVideos = () => {
   const [error, setError] = useState("");
 
   const fullUrlConstructor = (provider) => {
+    // return "http://192.168.1.3:5501/test/";
     return (
       "http://" +
       provider.hostname +
@@ -35,7 +36,7 @@ const useVideos = () => {
   };
 
   useEffect(() => {
-    const fetchVideos = async () => {
+    const fetchVideos = async (idx) => {
       setLoading(true);
       try {
         const res = await fetch("http://192.168.1.3:3000/api/videos", {
@@ -43,7 +44,7 @@ const useVideos = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ url: fullUrlConstructor(providers[0]) }),
+          body: JSON.stringify({ url: fullUrlConstructor(providers[idx]) }),
         });
         const data = await res.json();
 
@@ -52,9 +53,11 @@ const useVideos = () => {
         }
 
         const randomizedVideos = randomizeVideos(data.data);
+        // const randomizedVideos = data.data;
 
         setVideos(randomizedVideos);
-        SaveVideos({ id: providers[0].id, videos: randomizedVideos });
+        SaveVideos({ id: providers[idx].id, videos: randomizedVideos });
+        console.log(providers);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -63,7 +66,9 @@ const useVideos = () => {
     };
 
     if (providers.length > 0) {
-      fetchVideos();
+      providers.forEach((provider, idx) => {
+        fetchVideos(idx);
+      });
     }
   }, []);
 
