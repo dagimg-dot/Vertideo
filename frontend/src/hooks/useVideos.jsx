@@ -24,52 +24,66 @@ const useVideos = () => {
 
   const fullUrlConstructor = (provider) => {
     // Test
-    // return "http://192.168.1.3:5501/test/";
-    return (
-      "http://" +
-      provider.hostname +
-      ":" +
-      provider.port +
-      "/" +
-      "share/" +
-      provider.foldername
-    );
+    return "http://192.168.1.3:5501/test/";
+    // return (
+    //   "http://" +
+    //   provider.hostname +
+    //   ":" +
+    //   provider.port +
+    //   "/" +
+    //   "share/" +
+    //   provider.foldername
+    // );
+  };
+
+  const getAllVideos = () => {
+    let allVideos = [];
+
+    providers.map((provider) => {
+      if (provider.videos.length > 0) {
+        allVideos = [...allVideos, ...provider.videos];
+      }
+    });
+
+    return allVideos;
+  };
+
+  const fetchVideos = async (idx) => {
+    setLoading(true);
+    try {
+      const res = await fetch("http://192.168.1.3:3000/api/videos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: fullUrlConstructor(providers[idx]) }),
+      });
+      const data = await res.json();
+      // console.log(data.data);
+
+      if (data.error) {
+        throw new Error(data.error.message);
+      }
+
+      const randomizedVideos = randomizeVideos(data.data);
+      // const randomizedVideos = data.data;
+
+      SaveVideos({ id: providers[idx].id, videos: randomizedVideos });
+    } catch (error) {
+      setError(error.message);
+      SaveVideos({ id: providers[idx].id, videos: [] });
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    const fetchVideos = async (idx) => {
-      setLoading(true);
-      try {
-        const res = await fetch("http://192.168.1.3:3000/api/videos", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ url: fullUrlConstructor(providers[idx]) }),
-        });
-        const data = await res.json();
-
-        if (data.error) {
-          throw new Error(data.error.message);
-        }
-
-        const randomizedVideos = randomizeVideos(data.data);
-        // const randomizedVideos = data.data;
-
-        setVideos(randomizedVideos);
-        SaveVideos({ id: providers[idx].id, videos: randomizedVideos });
-      } catch (error) {
-        setError(error.message);
-        SaveVideos({ id: providers[idx].id, videos: [] });
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (providers.length > 0) {
       providers.forEach((provider, idx) => {
         fetchVideos(idx);
       });
+
+      setVideos(getAllVideos());
     }
   }, []);
 
