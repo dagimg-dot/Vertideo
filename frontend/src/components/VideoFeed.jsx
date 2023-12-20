@@ -3,29 +3,12 @@ import { Link } from "react-router-dom";
 import useVideos from "../hooks/useVideos";
 import Loader from "./Loader";
 import { Error } from "./Icons/PlayerIcons";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../store/store";
 
 const VideoFeed = () => {
-  const [isLoading, error, Videos] = useVideos();
-  const [allVideos, setAllVideos] = useState([]);
   const { providers } = useContext(GlobalContext);
-
-  useEffect(() => {
-    const getAllVideos = () => {
-      let allVideos = [];
-
-      providers.map((provider) => {
-        if (provider.videos.length > 0) {
-          allVideos = [...allVideos, ...provider.videos];
-        }
-      });
-
-      return allVideos;
-    };
-
-    setAllVideos(getAllVideos());
-  }, []);
+  const [isLoading, error, Videos] = useVideos();
 
   if (isLoading) {
     return <Loader message={"Fetching your videos..."} />;
@@ -41,16 +24,24 @@ const VideoFeed = () => {
   }
 
   if (providers.length !== 0) {
-    return allVideos.map((video) => {
+    if (Videos.length > 0) {
+      return Videos.map((video) => {
+        return (
+          <div
+            key={video.src}
+            className="w-full h-full snap-center scroll-smooth"
+          >
+            <VideoPlayer {...video} />
+          </div>
+        );
+      });
+    } else {
       return (
-        <div
-          key={video.src}
-          className="w-full h-full snap-center scroll-smooth"
-        >
-          <VideoPlayer {...video} />
+        <div className="pt-24 text-center">
+          The providers do not have videos
         </div>
       );
-    });
+    }
   } else {
     return (
       <div className="absolute left-1/2 -translate-x-1/2 top-20 w-full p-10">
