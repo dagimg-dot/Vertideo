@@ -18,15 +18,15 @@ const Provider = () => {
 
   return (
     <Default>
-      <div className="flex flex-col px-4 h-full">
-        <main className="flex-grow">
-          <div className="flex justify-between py-4 text-3xl mb-8 items-center">
+      <div className="flex flex-col h-full">
+        <main>
+          <div className="flex justify-between w-full p-4 text-3xl mb-8 items-center fixed top-0 bg-[#101115]">
             <h1>Providers</h1>
             <div onClick={toggleSettingsModal} ref={settingBtn}>
               <SettingsIcon />
             </div>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 my-24 px-4">
             {providers.length !== 0 ? (
               providers.map((provider) => (
                 <ProviderCard key={provider.id} {...provider} />
@@ -48,7 +48,7 @@ const Provider = () => {
         <div className="flex">
           <div className="flex-grow"></div>
           <button
-            className="px-4 py-4 bg-[#bcfb08] rounded-lg mb-6"
+            className="px-4 py-4 bg-[#bcfb08] rounded-lg mb-6 fixed bottom-12 right-4"
             onClick={() => setAddOpen(true)}
           >
             <AddIcon />

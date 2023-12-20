@@ -22,7 +22,7 @@ const Search = () => {
 
   return (
     <Default>
-      <div className="px-4 my-4">
+      <div className=" w-full fixed top-0 bg-[#101115] px-4 py-4">
         <input
           type="text"
           value={searchToken}
@@ -40,7 +40,7 @@ const Search = () => {
           page and add at least one provider.
         </div>
       ) : (
-        <div className="flex flex-col gap-4 px-4 my-10">
+        <div className="flex flex-col gap-4 px-4 mt-24 mb-4">
           {results.length === 0 ? (
             videoList.length !== 0 ? (
               videoList.map((video) => <VideoCard key={video.src} {...video} />)
