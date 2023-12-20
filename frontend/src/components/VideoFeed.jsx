@@ -3,49 +3,29 @@ import { Link } from "react-router-dom";
 import useVideos from "../hooks/useVideos";
 import Loader from "./Loader";
 import { Error } from "./Icons/PlayerIcons";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../store/store";
-
-// Test
-
-// const Videos = [
-//   {
-//     id: 1,
-//     folder: "assets",
-//     src: "../../src/assets/video3.mp4",
-//   },
-//   {
-//     id: 2,
-//     folder: "assets",
-//     src: "../../src/assets/video.mp4",
-//   },
-//   {
-//     id: 3,
-//     folder: "assets",
-//     src: "../../src/assets/video3.mp4",
-//   },
-//   {
-//     id: 4,
-//     folder: "assets",
-//     src: "../../src/assets/vvideo.mp4",
-//   },
-// ];
 
 const VideoFeed = () => {
   const [isLoading, error, Videos] = useVideos();
+  const [allVideos, setAllVideos] = useState([]);
   const { providers } = useContext(GlobalContext);
 
-  const getAllVideos = () => {
-    let allVideos = [];
+  useEffect(() => {
+    const getAllVideos = () => {
+      let allVideos = [];
 
-    providers.map((provider) => {
-      if (provider.videos.length > 0) {
-        allVideos = [...allVideos, ...provider.videos];
-      }
-    });
+      providers.map((provider) => {
+        if (provider.videos.length > 0) {
+          allVideos = [...allVideos, ...provider.videos];
+        }
+      });
 
-    return allVideos;
-  };
+      return allVideos;
+    };
+
+    setAllVideos(getAllVideos());
+  }, []);
 
   if (isLoading) {
     return <Loader message={"Fetching your videos..."} />;
@@ -61,8 +41,6 @@ const VideoFeed = () => {
   }
 
   if (providers.length !== 0) {
-    const allVideos = getAllVideos();
-
     return allVideos.map((video) => {
       return (
         <div
