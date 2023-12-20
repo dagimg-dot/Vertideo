@@ -14,7 +14,7 @@ const Switch = () => {
       <div
         className={
           "bg-[#181f21] md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md duration-500 ease-in-out" +
-          (toggle ? "" : toggleClass)
+          (toggle ? toggleClass : "")
         }
       ></div>
     </div>
