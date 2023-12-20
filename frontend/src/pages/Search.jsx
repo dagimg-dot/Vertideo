@@ -41,9 +41,15 @@ const Search = () => {
         </div>
       ) : (
         <div className="flex flex-col gap-4 px-4 my-10">
-          {results.length === 0
-            ? videoList.map((video) => <VideoCard key={video.src} {...video} />)
-            : results.map((video) => <VideoCard key={video.src} {...video} />)}
+          {results.length === 0 ? (
+            videoList.length !== 0 ? (
+              videoList.map((video) => <VideoCard key={video.src} {...video} />)
+            ) : (
+              <div className="text-center">No videos to search</div>
+            )
+          ) : (
+            results.map((video) => <VideoCard key={video.src} {...video} />)
+          )}
         </div>
       )}
     </Default>
