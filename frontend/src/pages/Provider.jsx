@@ -1,6 +1,6 @@
 import Default from "../layouts/Default";
 import { AddIcon, SettingsIcon } from "../components/Icons/ProviderIcons";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import AddProviderModal from "../components/AddProviderModal";
 import ProviderCard from "../components/ProviderCard";
 import { GlobalContext } from "../store/store";
