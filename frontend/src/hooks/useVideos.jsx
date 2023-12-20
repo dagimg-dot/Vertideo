@@ -23,6 +23,7 @@ const useVideos = () => {
   const [error, setError] = useState("");
 
   const fullUrlConstructor = (provider) => {
+    // Test
     // return "http://192.168.1.3:5501/test/";
     return (
       "http://" +
@@ -57,9 +58,9 @@ const useVideos = () => {
 
         setVideos(randomizedVideos);
         SaveVideos({ id: providers[idx].id, videos: randomizedVideos });
-        console.log(providers);
       } catch (error) {
         setError(error.message);
+        SaveVideos({ id: providers[idx].id, videos: [] });
       } finally {
         setLoading(false);
       }
