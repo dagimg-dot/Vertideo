@@ -42,7 +42,12 @@ const Search = () => {
       ) : (
         <div className="flex flex-col gap-4 px-4 mt-24 mb-4">
           {results.length === 0 ? (
-            videoList.length !== 0 ? (
+            searchToken !== "" ? (
+              <div className="text-center">
+                No videos found that match{" "}
+                <span className="text-[#bcfb08] underline">{searchToken}</span>
+              </div>
+            ) : videoList.length !== 0 ? (
               videoList.map((video) => <VideoCard key={video.src} {...video} />)
             ) : (
               <div className="text-center">No videos to search</div>
