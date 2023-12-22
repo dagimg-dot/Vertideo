@@ -8,17 +8,17 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
     foldername: _formData?.foldername || "",
   });
 
+  const [formErrors, setFormErrors] = useState({});
+  const [isDisabled, setDisabled] = useState(true);
+
+  const { providers, AddProvider, EditProvider } = useContext(GlobalContext);
+
   const isEditMode = () => {
     if (_formData?.id) {
       return true;
     }
     return false;
   };
-
-  const [formErrors, setFormErrors] = useState({});
-  const [isDisabled, setDisabled] = useState(true);
-
-  const { AddProvider, EditProvider } = useContext(GlobalContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -79,6 +79,15 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
     }
   }, [formErrors]);
 
+  const checkDuplicate = (formData) => {
+    return providers.some(
+      (provider) =>
+        provider.hostname === formData.hostname &&
+        provider.port === formData.port &&
+        provider.foldername === formData.foldername
+    );
+  };
+
   const handleSaveClick = (event) => {
     event.preventDefault();
 
@@ -86,7 +95,11 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
       const id = _formData.id;
       EditProvider({ id, ...formData });
     } else {
-      AddProvider(formData);
+      if (!checkDuplicate(formData)) {
+        AddProvider(formData);
+      } else {
+        console.log("The provider already exists");
+      }
     }
     toggleModal();
   };
