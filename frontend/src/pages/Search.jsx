@@ -48,12 +48,16 @@ const Search = () => {
                 <span className="text-[#bcfb08] underline">{searchToken}</span>
               </div>
             ) : videoList.length !== 0 ? (
-              videoList.map((video) => <VideoCard key={video.src} {...video} />)
+              videoList.map((video) => (
+                <VideoCard key={video.src} video={video} token={searchToken} />
+              ))
             ) : (
               <div className="text-center">No videos to search</div>
             )
           ) : (
-            results.map((video) => <VideoCard key={video.src} {...video} />)
+            results.map((video) => (
+              <VideoCard key={video.src} video={video} token={searchToken} />
+            ))
           )}
         </div>
       )}
