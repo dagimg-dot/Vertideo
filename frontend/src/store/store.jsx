@@ -4,9 +4,8 @@ import Reducer from "./Reducer";
 import randomIdGenerator from "../utils/randomIdGenerator";
 
 const initialState = {
-  providers: [
-    { id: 1, hostname: "test", port: "test", foldername: "test", videos: [] },
-  ],
+  providers: [],
+  videos: [],
 };
 
 export const GlobalContext = createContext(initialState);
@@ -45,6 +44,7 @@ export const GlobalProvider = ({ children }) => {
         EditProvider,
         DeleteProvider,
         SaveVideos,
+        allVideos: state.videos,
       }}
     >
       {children}
