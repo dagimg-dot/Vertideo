@@ -32,7 +32,7 @@ const Provider = () => {
                 <ProviderCard key={provider.id} {...provider} />
               ))
             ) : (
-              <div>You have no providers !</div>
+              <div className="text-center">You have no providers !</div>
             )}
           </div>
         </main>
