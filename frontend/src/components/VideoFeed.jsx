@@ -7,8 +7,8 @@ import { useContext } from "react";
 import { GlobalContext } from "../store/store";
 
 const VideoFeed = () => {
-  const { providers } = useContext(GlobalContext);
-  const [isLoading, error, Videos] = useVideos();
+  const { providers, allVideos } = useContext(GlobalContext);
+  const [isLoading, error] = useVideos();
 
   if (isLoading) {
     return <Loader message={"Fetching your videos..."} />;
@@ -24,8 +24,8 @@ const VideoFeed = () => {
   }
 
   if (providers.length !== 0) {
-    if (Videos.length > 0) {
-      return Videos.map((video) => {
+    if (allVideos.length > 0) {
+      return allVideos.map((video) => {
         return (
           <div
             key={video.src}
