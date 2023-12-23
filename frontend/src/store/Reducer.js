@@ -53,7 +53,6 @@ const Reducer = (state, action) => {
       ];
 
       const videos = mergeVideos(state.videos, action.payload.videos);
-      console.log(videos);
 
       return {
         ...state,
