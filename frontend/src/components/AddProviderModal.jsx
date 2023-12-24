@@ -107,14 +107,15 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
     if (isEditMode()) {
       const id = _formData.id;
       EditProvider({ id, ...formData });
+      toggleModal();
     } else {
       if (!checkDuplicate(formData)) {
         AddProvider(formData);
+        toggleModal();
       } else {
         showToast();
       }
     }
-    toggleModal();
   };
 
   const Error = ({ message }) => {
