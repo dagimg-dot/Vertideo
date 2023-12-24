@@ -1,11 +1,18 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 import { ACTIONS } from "../utils/types";
 import Reducer from "./Reducer";
 import randomIdGenerator from "../utils/randomIdGenerator";
 
 const initialState = {
-  providers: [],
-  videos: [],
+  providers: [
+    {
+      id: 1,
+      hostname: "192.168.1.7",
+      port: "8080",
+      foldername: "Instafeed",
+      videos: [],
+    },
+  ],
 };
 
 export const GlobalContext = createContext(initialState);
@@ -44,7 +51,6 @@ export const GlobalProvider = ({ children }) => {
         EditProvider,
         DeleteProvider,
         SaveVideos,
-        allVideos: state.videos,
       }}
     >
       {children}

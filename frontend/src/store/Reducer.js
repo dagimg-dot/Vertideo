@@ -1,20 +1,5 @@
 import { ACTIONS } from "../utils/types";
 
-const mergeVideos = (oldVideos, newVideos) => {
-  const mergedVideos = [...oldVideos];
-  newVideos.forEach((newVideo) => {
-    const isDuplicate = oldVideos.some(
-      (oldVideo) =>
-        newVideo.src.split("/").pop() === oldVideo.src.split("/").pop()
-    );
-    if (!isDuplicate) {
-      mergedVideos.push(newVideo);
-    }
-  });
-
-  return mergedVideos;
-};
-
 const Reducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.ADD_PROVIDER:
@@ -52,12 +37,9 @@ const Reducer = (state, action) => {
         ...action.payload.videos,
       ];
 
-      const videos = mergeVideos(state.videos, action.payload.videos);
-
       return {
         ...state,
         providers: [...state.providers],
-        videos: videos,
       };
   }
 };
