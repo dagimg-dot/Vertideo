@@ -5,10 +5,11 @@ import Loader from "./Loader";
 import { Error } from "./Icons/PlayerIcons";
 import { useContext } from "react";
 import { GlobalContext } from "../store/store";
+import mergeVideos from "../utils/mergeVideos";
 
 const VideoFeed = () => {
-  const { providers, allVideos } = useContext(GlobalContext);
   const [isLoading, error] = useVideos();
+  const { providers } = useContext(GlobalContext);
 
   if (isLoading) {
     return <Loader message={"Fetching your videos..."} />;
@@ -21,9 +22,9 @@ const VideoFeed = () => {
         <span>{error}</span>
       </div>
     );
-  }
+  } else if (providers.length !== 0) {
+    const allVideos = mergeVideos(providers);
 
-  if (providers.length !== 0) {
     if (allVideos.length > 0) {
       return allVideos.map((video) => {
         return (
