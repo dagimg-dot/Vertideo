@@ -96,7 +96,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
       style: {
         backgroundColor: "#bcfb08",
         fontWeight: "bold",
-        marginBottom: "130px",
+        marginBottom: "140px",
       },
     });
   };
