@@ -4,6 +4,7 @@ import { GlobalContext } from "../store/store";
 import { Link } from "react-router-dom";
 import VideoCard from "../components/VideoCard";
 import useSearch from "../hooks/useSearch";
+import mergeVideos from "../utils/mergeVideos";
 
 const Search = () => {
   const { providers } = useContext(GlobalContext);
@@ -11,12 +12,7 @@ const Search = () => {
   const [results, searchToken, setSearchToken] = useSearch(videoList);
 
   useEffect(() => {
-    let newVideoList = [];
-    providers.forEach((provider) => {
-      if (provider.videos.length > 0) {
-        newVideoList = [...newVideoList, ...provider.videos];
-      }
-    });
+    const newVideoList = mergeVideos(providers);
     setVideoList(newVideoList);
   }, []);
 
