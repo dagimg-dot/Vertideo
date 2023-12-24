@@ -27,17 +27,19 @@ const VideoFeed = () => {
     const allVideos = mergeVideos(providers);
 
     if (allVideos.length > 0) {
-      return allVideos.map((video) => {
-        return (
-          <div
-            key={video.src}
-            className="w-full h-full snap-center scroll-smooth"
-          >
-            <Toaster />
-            <VideoPlayer {...video} />
-          </div>
-        );
-      });
+      return (
+        <>
+          <Toaster />
+          {allVideos.map((video) => (
+            <div
+              key={video.src}
+              className="w-full h-full snap-center scroll-smooth"
+            >
+              <VideoPlayer {...video} />
+            </div>
+          ))}
+        </>
+      );
     } else {
       return (
         <div className="pt-24 text-center">
