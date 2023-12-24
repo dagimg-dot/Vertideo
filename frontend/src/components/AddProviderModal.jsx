@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { GlobalContext } from "../store/store";
 
 const AddProviderModal = ({ toggleModal, _formData }) => {
@@ -88,6 +89,18 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
     );
   };
 
+  const showToast = () => {
+    toast.error("The provider already exists", {
+      duration: "200",
+      position: "bottom-center",
+      style: {
+        backgroundColor: "#bcfb08",
+        fontWeight: "bold",
+        marginBottom: "130px",
+      },
+    });
+  };
+
   const handleSaveClick = (event) => {
     event.preventDefault();
 
@@ -98,7 +111,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
       if (!checkDuplicate(formData)) {
         AddProvider(formData);
       } else {
-        console.log("The provider already exists");
+        showToast();
       }
     }
     toggleModal();

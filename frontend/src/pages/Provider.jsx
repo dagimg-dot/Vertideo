@@ -5,7 +5,7 @@ import AddProviderModal from "../components/AddProviderModal";
 import ProviderCard from "../components/ProviderCard";
 import { GlobalContext } from "../store/store";
 import SettingsModal from "../components/SettingsModal";
-
+import { Toaster } from "react-hot-toast";
 const Provider = () => {
   const { providers } = useContext(GlobalContext);
   const [isAddOpen, setAddOpen] = useState(false);
@@ -18,6 +18,7 @@ const Provider = () => {
 
   return (
     <Default>
+      <Toaster />
       <div className="flex flex-col h-full">
         <main>
           <div className="flex justify-between w-full p-4 text-3xl mb-8 items-center fixed top-0 bg-[#101115]">
