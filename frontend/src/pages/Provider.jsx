@@ -6,6 +6,7 @@ import ProviderCard from "../components/ProviderCard";
 import { GlobalContext } from "../store/store";
 import SettingsModal from "../components/SettingsModal";
 import { Toaster } from "react-hot-toast";
+
 const Provider = () => {
   const { providers } = useContext(GlobalContext);
   const [isAddOpen, setAddOpen] = useState(false);
