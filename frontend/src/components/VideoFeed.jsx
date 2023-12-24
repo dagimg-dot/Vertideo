@@ -5,6 +5,7 @@ import Loader from "./Loader";
 import { Error } from "./Icons/PlayerIcons";
 import { useContext } from "react";
 import { GlobalContext } from "../store/store";
+import { Toaster } from "react-hot-toast";
 import mergeVideos from "../utils/mergeVideos";
 
 const VideoFeed = () => {
@@ -32,6 +33,7 @@ const VideoFeed = () => {
             key={video.src}
             className="w-full h-full snap-center scroll-smooth"
           >
+            <Toaster />
             <VideoPlayer {...video} />
           </div>
         );

@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../store/store";
 import randomizeVideos from "../utils/randomizeVideos";
+import toast from "react-hot-toast";
+import mergeVideos from "../utils/mergeVideos";
 
 const useVideos = () => {
   const { providers, SaveVideos } = useContext(GlobalContext);
@@ -40,7 +42,14 @@ const useVideos = () => {
       const randomizedVideos = randomizeVideos(data.data);
       SaveVideos({ id: providers[idx].id, videos: randomizedVideos });
     } catch (error) {
-      setError(error.message);
+      const allVideos = mergeVideos(providers);
+      if (allVideos.length === 0) {
+        setError(error.message);
+      } else {
+        toast.error(
+          `${providers[idx].foldername} failed to fetch. ${error.message}`
+        );
+      }
       SaveVideos({ id: providers[idx].id, videos: [] });
     } finally {
       setLoading(false);
