@@ -47,7 +47,14 @@ const useVideos = () => {
         setError(error.message);
       } else {
         toast.error(
-          `${providers[idx].foldername} failed to fetch. ${error.message}`
+          `${providers[idx].foldername} failed to fetch. ${error.message}`,
+          {
+            position: "top-center",
+            style: {
+              backgroundColor: "#bcfb08",
+              fontWeight: "bold",
+            },
+          }
         );
       }
       SaveVideos({ id: providers[idx].id, videos: [] });
