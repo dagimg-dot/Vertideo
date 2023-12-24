@@ -1,17 +1,16 @@
 const SeekBar = ({ className, value, onChange, currentTime, duration }) => {
+  const currTime = currentTime.minutes
+    ? `${currentTime.minutes}:${currentTime.seconds}`
+    : "00:00";
+  const dur = duration.minutes
+    ? `${duration.minutes}:${duration.seconds}`
+    : "00:00";
+
   return (
     <div className={className}>
       <div className="flex justify-between text-sm px-2">
-        {currentTime.minutes ? (
-          <div>{`${currentTime.minutes}:${currentTime.seconds}`}</div>
-        ) : (
-          <div>00:00</div>
-        )}
-        {duration.minutes ? (
-          <div>{`${duration.minutes}:${duration.seconds}`}</div>
-        ) : (
-          <div>00:00</div>
-        )}
+        <span>{currTime}</span>
+        <span>{dur}</span>
       </div>
       <input
         type="range"
