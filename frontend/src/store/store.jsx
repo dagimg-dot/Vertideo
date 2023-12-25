@@ -1,30 +1,38 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 import { ACTIONS } from "../utils/types";
 import Reducer from "./Reducer";
 import randomIdGenerator from "../utils/randomIdGenerator";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const initialState = {
-  providers: [
-    {
-      id: 1,
-      hostname: "192.168.1.7",
-      port: "8080",
-      foldername: "Instafeed",
-      videos: [],
-    },
-  ],
+  providers: JSON.parse(localStorage.getItem("Providers")) || [],
 };
 
-export const GlobalContext = createContext(initialState);
+export const GlobalContext = createContext({
+  providers: initialState.providers,
+  AddProvider: () => {},
+  EditProvider: () => {},
+  DeleteProvider: () => {},
+  SaveVideos: () => {},
+});
 
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
+  const [providers, setProviders] = useLocalStorage(
+    "Providers",
+    state.providers
+  );
+
   const AddProvider = (formData) => {
     const id = randomIdGenerator();
+
+    const newProvider = { id, ...formData, videos: [] };
+    setProviders([...providers, newProvider]);
+
     dispatch({
       type: ACTIONS.ADD_PROVIDER,
-      payload: { id: id, ...formData, videos: [] },
+      payload: newProvider,
     });
   };
 
