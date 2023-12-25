@@ -53,6 +53,11 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const DeleteProvider = (id) => {
+    const filteredProviders = state.providers.filter(
+      (provider) => provider.id !== id
+    );
+    setProviders(filteredProviders);
+
     dispatch({ type: ACTIONS.DELETE_PROVIDER, payload: id });
   };
 
