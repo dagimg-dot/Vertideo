@@ -41,6 +41,9 @@ const Reducer = (state, action) => {
         ...state,
         providers: [...state.providers],
       };
+
+    default:
+      return state;
   }
 };
 
