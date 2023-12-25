@@ -37,9 +37,18 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const EditProvider = (formData) => {
+    const editedProvider = state.providers.find(
+      (provider) => provider.id === formData.id
+    );
+
+    const updatedProviders = [...state.providers];
+    updatedProviders[state.providers.indexOf(editedProvider)] = formData;
+
+    setProviders(updatedProviders);
+
     dispatch({
       type: ACTIONS.EDIT_PROVIDER,
-      payload: { ...formData, videos: [] },
+      payload: formData,
     });
   };
 
