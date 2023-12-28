@@ -1,9 +1,9 @@
 import VideoPlayer from "./VideoPlayer";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useVideos from "../hooks/useVideos";
 import Loader from "./Loader";
 import { Error } from "./Icons/PlayerIcons";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../store/store";
 import { Toaster } from "react-hot-toast";
 import mergeVideos from "../utils/mergeVideos";
@@ -11,6 +11,15 @@ import mergeVideos from "../utils/mergeVideos";
 const VideoFeed = () => {
   const [isLoading, error] = useVideos();
   const { providers } = useContext(GlobalContext);
+  const location = useLocation();
+
+  useEffect(() => {
+    const { hash } = location;
+    if (hash !== "") {
+      const videoElement = document.getElementById(hash.split("#").pop());
+      videoElement.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]);
 
   if (isLoading) {
     return <Loader message={"Fetching your videos..."} />;
@@ -33,6 +42,7 @@ const VideoFeed = () => {
           {allVideos.map((video) => (
             <div
               key={video.src}
+              id={video.id}
               className="w-full h-full snap-center scroll-smooth"
             >
               <VideoPlayer {...video} />
