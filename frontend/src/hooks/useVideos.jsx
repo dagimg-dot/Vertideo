@@ -43,7 +43,6 @@ const useVideos = () => {
       }
 
       const randomizedVideos = randomizeVideos(data.data);
-      console.log(data.data);
       SaveVideos({ id: providers[idx].id, videos: randomizedVideos });
     } catch (error) {
       const allVideos = mergeVideos(providers);
