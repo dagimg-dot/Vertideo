@@ -10,7 +10,7 @@ const IP_ADDRESS = getIpAddress();
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static("frontend"));
+app.use("/thumbnails", express.static("thumbnails"));
 
 app.use("/api", router);
 
