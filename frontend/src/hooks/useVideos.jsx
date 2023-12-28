@@ -11,7 +11,7 @@ const useVideos = () => {
 
   const fullUrlConstructor = (provider) => {
     // Test
-    return `http://${import.meta.env.VITE_IPADDRESS}:5501/test/`;
+    return `http://${import.meta.env.VITE_IPADDRESS}:5501/test`;
     // return (
     //   "http://" +
     //   provider.hostname +
