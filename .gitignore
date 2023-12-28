@@ -1,6 +1,7 @@
 .vscode/
 lib/
 assets/
+thumbnails/
 node_modules/
 test/*.html
 test/*.mp4
