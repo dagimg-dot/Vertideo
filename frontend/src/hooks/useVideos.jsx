@@ -11,22 +11,25 @@ const useVideos = () => {
 
   const fullUrlConstructor = (provider) => {
     // Test
-    // return "http://192.168.1.4:5501/test/";
-    return (
-      "http://" +
-      provider.hostname +
-      ":" +
-      provider.port +
-      "/" +
-      "share/" +
-      provider.foldername
-    );
+    return `http://${import.meta.env.VITE_IPADDRESS}:5501/test/`;
+    // return (
+    //   "http://" +
+    //   provider.hostname +
+    //   ":" +
+    //   provider.port +
+    //   "/" +
+    //   "share/" +
+    //   provider.foldername
+    // );
   };
 
   const fetchVideos = async (idx) => {
     setLoading(true);
+    const BACKEND_URL = `http://${
+      import.meta.env.VITE_IPADDRESS
+    }:3000/api/videos`;
     try {
-      const res = await fetch("http://192.168.1.4:3000/api/videos", {
+      const res = await fetch(BACKEND_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,6 +43,7 @@ const useVideos = () => {
       }
 
       const randomizedVideos = randomizeVideos(data.data);
+      console.log(data.data);
       SaveVideos({ id: providers[idx].id, videos: randomizedVideos });
     } catch (error) {
       const allVideos = mergeVideos(providers);
