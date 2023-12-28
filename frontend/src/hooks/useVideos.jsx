@@ -67,12 +67,16 @@ const useVideos = () => {
   };
 
   useEffect(() => {
-    if (providers.length > 0) {
-      providers.forEach((provider, idx) => {
-        fetchVideos(idx);
-      });
+    const allVideos = mergeVideos(providers);
+
+    if (allVideos.length === 0) {
+      if (providers.length > 0) {
+        providers.forEach((provider, idx) => {
+          fetchVideos(idx);
+        });
+      }
     }
-  }, []);
+  }, [providers]);
 
   return [isLoading, error];
 };
