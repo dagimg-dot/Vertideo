@@ -14,12 +14,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
 
   const { providers, AddProvider, EditProvider } = useContext(GlobalContext);
 
-  const isEditMode = () => {
-    if (_formData?.id) {
-      return true;
-    }
-    return false;
-  };
+  const isEditMode = _formData?.id ? true : false;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,7 +54,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
   };
 
   useEffect(() => {
-    if (isEditMode()) {
+    if (isEditMode) {
       if (
         Object.keys(formErrors).length > 0 &&
         Object.keys(formErrors).every((key) => formErrors[key] === "")
@@ -104,7 +99,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
   const handleSaveClick = (event) => {
     event.preventDefault();
 
-    if (isEditMode()) {
+    if (isEditMode) {
       const id = _formData.id;
       EditProvider({ id, ...formData });
       toggleModal();
@@ -173,7 +168,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
             className="bg-[#bcfb08] text-[#101115] px-4 py-2 rounded-lg font-bold shadow-md shadow-[#181f21] disabled:bg-gray-300"
             disabled={isDisabled}
           >
-            {isEditMode() ? "Update" : "Save"}
+            {isEditMode ? "Update" : "Save"}
           </button>
         </div>
       </form>
