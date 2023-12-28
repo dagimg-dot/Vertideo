@@ -29,7 +29,7 @@ const VideoFeed = () => {
     return (
       <div className="flex flex-col gap-4 w-full items-center justify-center mt-24">
         <Error />
-        <span>{error}</span>
+        <span className="px-4 text-center">{error}</span>
       </div>
     );
   } else if (providers.length !== 0) {
