@@ -30,6 +30,10 @@
 - Needs heavy optimization (Slow loading)
 - IntersectionObserverAPI not working on mobiles
 
+## Contributions
+
+- I would be really happy if you are willing to contribute. What needs to be done is written above !! 😊
+
 ## Some Screenshots
 
 <div style="display: grid; gap: 20px; grid-template-columns: 1fr 1fr;" >
