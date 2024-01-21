@@ -11,16 +11,16 @@ const useVideos = () => {
 
   const fullUrlConstructor = (provider) => {
     // Test
-    return `http://${import.meta.env.VITE_IPADDRESS}:5501/test`;
-    // return (
-    //   "http://" +
-    //   provider.hostname +
-    //   ":" +
-    //   provider.port +
-    //   "/" +
-    //   "share/" +
-    //   provider.foldername
-    // );
+    // return `http://${import.meta.env.VITE_IPADDRESS}:5501/test`;
+    return (
+      "http://" +
+      provider.hostname +
+      ":" +
+      provider.port +
+      "/" +
+      "share/" +
+      provider.foldername
+    );
   };
 
   const fetchVideos = async (idx) => {
@@ -69,14 +69,14 @@ const useVideos = () => {
   useEffect(() => {
     const allVideos = mergeVideos(providers);
 
-    if (allVideos.length === 0) {
+    // if (allVideos.length === 0) { 
       if (providers.length > 0) {
         providers.forEach((provider, idx) => {
           fetchVideos(idx);
         });
       }
-    }
-  }, [providers]);
+    // }
+  }, []);
 
   return [isLoading, error];
 };

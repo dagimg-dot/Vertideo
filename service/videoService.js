@@ -33,8 +33,8 @@ const getAllVideos = async (url) => {
   const videos = videoLinks.map((vid) => {
     const video = {
       id: randomIdGenerator(),
-      // folder: vid.split("/")[4],
-      folder: vid.split("/")[3], // For testing
+      folder: vid.split("/")[4],
+      // folder: vid.split("/")[3], // For testing
       thumbnail: generateThumbnailLink(vid),
       src: vid,
     };
