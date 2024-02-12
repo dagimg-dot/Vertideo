@@ -6,6 +6,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 
 const initialState = {
   providers: JSON.parse(localStorage.getItem("Providers")) || [],
+  likedVideos: JSON.parse(localStorage.getItem("likedVideos")) || []
 };
 
 export const GlobalContext = createContext({
