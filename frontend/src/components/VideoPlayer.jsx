@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import Actions from "./Actions";
 import VideoDescription from "./VideoDescription";
 import SeekBar from "./SeekBar";
 import { FeedIcon } from "./Icons/FooterMenuIcons";
+import { GlobalContext } from "../store/store";
 
 const VideoPlayer = ({ folder, src }) => {
   const [playing, setPlaying] = useState(false);
@@ -54,7 +55,11 @@ const VideoPlayer = ({ folder, src }) => {
   const handleMetaData = () => {
     setDuration(formatTime(video.current.duration));
   };
-
+  const { likedVideos } = useContext(GlobalContext);
+  const colorFill = useMemo(() => {
+    return likedVideos.includes(src) ? "red" : "white";
+  }, [likedVideos]);
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -94,7 +99,8 @@ const VideoPlayer = ({ folder, src }) => {
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleMetaData}
       />
-      <Actions />
+
+      <Actions colorFill={colorFill} src={src} />
       {!playing && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-80">
           <FeedIcon color={"white"} solid={true} className={"w-24 h-24"} />
