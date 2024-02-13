@@ -1,12 +1,15 @@
+import { useState, useContext } from "react";
 import { Heart, Share } from "./Icons/PlayerIcons";
+import { GlobalContext } from "../store/store";
 
-const Actions = ({
-  likes = 123,
-  shares = 123,
-  hearted = false,
-}) => {
+const Actions = ({ colorFill, src }) => {
+  const { likeVideo } = useContext(GlobalContext);
+  // const [fill,setFill] = useState('white')
+  // const [isLiked,setIsLiked] = useState(false)
   const handleLike = () => {
-    alert("liked");
+    // setIsLiked(!isLiked)
+    // isLiked ? setFill('red') : setFill('white')
+    likeVideo(src);
   };
 
   const handleShare = () => {
@@ -20,15 +23,15 @@ const Actions = ({
           onClick={handleLike}
           className="text-white flex flex-col justify-center items-center mb-[8px] bg-transparent border-none stroke-gray-300"
         >
-          <Heart width={45} fill="white" />
-          <span title="like">{likes}</span>
+          <Heart width={45} fill={colorFill} />
+          {/* <span title="like">{likes}</span> */}
         </button>
         <button
           onClick={handleShare}
           className="text-white flex flex-col justify-center items-center mb-[8px] bg-transparent border-none stroke-gray-300"
         >
           <Share width={45} />
-          <span title="share">{shares}</span>
+          {/* <span title="share">{shares}</span> */}
         </button>
       </div>
     </aside>
