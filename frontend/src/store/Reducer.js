@@ -56,6 +56,11 @@ const Reducer = (state, action) => {
           likedVideos: doubleLiked,
         };
       }
+    case ACTIONS.TOGGLE_CLICKED:
+      return {
+        ...state,
+        isFavouriteClicked: action.payload
+      }
 
     default:
       return state;
