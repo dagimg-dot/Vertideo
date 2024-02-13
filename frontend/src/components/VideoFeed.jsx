@@ -10,7 +10,7 @@ import mergeVideos from "../utils/mergeVideos";
 
 const VideoFeed = () => {
   const [isLoading, error] = useVideos();
-  const { providers } = useContext(GlobalContext);
+  const { providers,isFavouriteClicked,likedVideos } = useContext(GlobalContext);
   const location = useLocation();
 
   useEffect(() => {
@@ -34,28 +34,55 @@ const VideoFeed = () => {
     );
   } else if (providers.length !== 0) {
     const allVideos = mergeVideos(providers);
-
-    if (allVideos.length > 0) {
-      return (
-        <>
-          <Toaster />
-          {allVideos.map((video) => (
-            <div
-              key={video.src}
-              id={video.id}
-              className="w-full h-full snap-center scroll-smooth"
-            >
-              <VideoPlayer {...video} />
-            </div>
-          ))}
-        </>
-      );
+    if (isFavouriteClicked == false) {
+      if (allVideos.length > 0) {
+        return (
+          <>
+            <Toaster />
+            {allVideos.map((video) => (
+              <div
+                key={video.src}
+                id={video.id}
+                className="w-full h-full snap-center scroll-smooth"
+              >
+                <VideoPlayer {...video} />
+              </div>
+            ))}
+          </>
+        );
+      } else {
+        return (
+          <div className="pt-24 text-center">
+            The providers do not have videos
+          </div>
+        );
+      }
     } else {
-      return (
-        <div className="pt-24 text-center">
-          The providers do not have videos
-        </div>
-      );
+      if (likedVideos.length > 0) {
+        return (
+          <>
+            <Toaster />
+            {allVideos.map(
+              (video) =>
+                likedVideos.includes(video.src) && (
+                  <div
+                    key={video.src}
+                    id={video.id}
+                    className="w-full h-full snap-center scroll-smooth"
+                  >
+                    <VideoPlayer {...video} />
+                  </div>
+                )
+            )}
+          </>
+        );
+      } else {
+        return (
+          <div className="absolute left-1/2 -translate-x-1/2 top-20 w-full p-10">
+            Your Favorite is empty! Like your videos
+          </div>
+        );
+      }
     }
   } else {
     return (
