@@ -4,11 +4,8 @@ import { GlobalContext } from "../store/store";
 
 const Actions = ({ colorFill, src }) => {
   const { likeVideo } = useContext(GlobalContext);
-  // const [fill,setFill] = useState('white')
-  // const [isLiked,setIsLiked] = useState(false)
+
   const handleLike = () => {
-    // setIsLiked(!isLiked)
-    // isLiked ? setFill('red') : setFill('white')
     likeVideo(src);
   };
 
