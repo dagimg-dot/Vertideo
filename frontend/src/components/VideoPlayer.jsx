@@ -59,7 +59,7 @@ const VideoPlayer = ({ folder, src }) => {
   const colorFill = useMemo(() => {
     return likedVideos.includes(src) ? "red" : "white";
   }, [likedVideos]);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
