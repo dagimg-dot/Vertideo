@@ -7,7 +7,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 const initialState = {
   providers: JSON.parse(localStorage.getItem("Providers")) || [],
   likedVideos: JSON.parse(localStorage.getItem("likedVideos")) || [],
-  isFavouriteClicked : false
+  isFavouriteClicked: false,
 };
 
 export const GlobalContext = createContext({
@@ -86,10 +86,10 @@ export const GlobalProvider = ({ children }) => {
 
     dispatch({ type: ACTIONS.LIKE_VIDEO, payload: { src } });
   };
-  
+
   const toggleClicked = (status) => {
-    dispatch({type: ACTIONS.TOGGLE_CLICKED, payload : status})
-  }
+    dispatch({ type: ACTIONS.TOGGLE_CLICKED, payload: status });
+  };
 
   return (
     <GlobalContext.Provider
@@ -102,7 +102,7 @@ export const GlobalProvider = ({ children }) => {
         DeleteProvider,
         SaveVideos,
         likeVideo,
-        toggleClicked
+        toggleClicked,
       }}
     >
       {children}

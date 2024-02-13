@@ -59,8 +59,8 @@ const Reducer = (state, action) => {
     case ACTIONS.TOGGLE_CLICKED:
       return {
         ...state,
-        isFavouriteClicked: action.payload
-      }
+        isFavouriteClicked: action.payload,
+      };
 
     default:
       return state;

@@ -10,7 +10,8 @@ import mergeVideos from "../utils/mergeVideos";
 
 const VideoFeed = () => {
   const [isLoading, error] = useVideos();
-  const { providers,isFavouriteClicked,likedVideos } = useContext(GlobalContext);
+  const { providers, isFavouriteClicked, likedVideos } =
+    useContext(GlobalContext);
   const location = useLocation();
 
   useEffect(() => {
