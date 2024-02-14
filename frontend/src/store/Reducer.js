@@ -41,6 +41,26 @@ const Reducer = (state, action) => {
         ...state,
         providers: [...state.providers],
       };
+    case ACTIONS.LIKE_VIDEO:
+      if (!state.likedVideos.includes(action.payload.src))
+        return {
+          ...state,
+          likedVideos: [...state.likedVideos, action.payload.src],
+        };
+      else {
+        const doubleLiked = state.likedVideos.filter(
+          (video_src) => video_src !== action.payload.src
+        );
+        return {
+          ...state,
+          likedVideos: doubleLiked,
+        };
+      }
+    case ACTIONS.TOGGLE_CLICKED:
+      return {
+        ...state,
+        isFavouriteClicked: action.payload,
+      };
 
     default:
       return state;

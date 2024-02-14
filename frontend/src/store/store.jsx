@@ -6,14 +6,18 @@ import useLocalStorage from "../hooks/useLocalStorage";
 
 const initialState = {
   providers: JSON.parse(localStorage.getItem("Providers")) || [],
+  likedVideos: JSON.parse(localStorage.getItem("likedVideos")) || [],
+  isFavouriteClicked: false,
 };
 
 export const GlobalContext = createContext({
   providers: initialState.providers,
+  likedVideos: initialState.likedVideos,
   AddProvider: () => {},
   EditProvider: () => {},
   DeleteProvider: () => {},
   SaveVideos: () => {},
+  likeVideo: () => {},
 });
 
 export const GlobalProvider = ({ children }) => {
@@ -22,6 +26,11 @@ export const GlobalProvider = ({ children }) => {
   const [providers, setProviders] = useLocalStorage(
     "Providers",
     state.providers
+  );
+
+  const [likedVideos, setLikedVideos] = useLocalStorage(
+    "likedVideos",
+    state.likedVideos
   );
 
   const AddProvider = (formData) => {
@@ -65,14 +74,35 @@ export const GlobalProvider = ({ children }) => {
     dispatch({ type: ACTIONS.SAVE_VIDEOS, payload: { id, videos } });
   };
 
+  const likeVideo = (src) => {
+    if (!state.likedVideos.includes(src)) {
+      setLikedVideos([...likedVideos, src]);
+    } else {
+      const doubleLiked = state.likedVideos.filter(
+        (video_src) => video_src !== src
+      );
+      setLikedVideos(doubleLiked);
+    }
+
+    dispatch({ type: ACTIONS.LIKE_VIDEO, payload: { src } });
+  };
+
+  const toggleClicked = (status) => {
+    dispatch({ type: ACTIONS.TOGGLE_CLICKED, payload: status });
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         providers: state.providers,
+        likedVideos: state.likedVideos,
+        isFavouriteClicked: state.isFavouriteClicked,
         AddProvider,
         EditProvider,
         DeleteProvider,
         SaveVideos,
+        likeVideo,
+        toggleClicked,
       }}
     >
       {children}
