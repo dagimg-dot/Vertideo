@@ -1,14 +1,20 @@
 import { useState } from "react";
+import useDarkMode from "../hooks/useDarkMode";
 
-const Switch = () => {
+const Switch = (darkMode) => {
   const [toggle, setToggle] = useState(true);
+  const [colorTheme, setTheme] = useDarkMode();
   const toggleClass = "transform translate-x-5";
+  const handleClick = () => {
+    darkMode && setTheme(colorTheme)
+    setToggle(!toggle);
+  }
 
   return (
     <div
       className="md:w-14 md:h-7 w-12 h-6 flex items-center bg-[#bcfb08] rounded-full p-1 cursor-pointer"
       onClick={() => {
-        setToggle(!toggle);
+        handleClick();
       }}
     >
       <div
