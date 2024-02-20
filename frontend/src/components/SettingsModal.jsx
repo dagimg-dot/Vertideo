@@ -22,7 +22,7 @@ const SettingsModal = ({ toggleModal, btnRef }) => {
           </div>
           <div className="flex justify-between items-center bg-[#101115] p-4 rounded-lg">
             <span>Dark Mode</span>
-            <Switch />
+            <Switch darkMode = {true}/>
           </div>
         </div>
       </div>
