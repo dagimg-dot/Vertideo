@@ -1,12 +1,12 @@
 import { useState } from "react";
 import useDarkMode from "../hooks/useDarkMode";
 
-const Switch = (darkMode) => {
-  const [toggle, setToggle] = useState(false);
+const Switch = (isDarkModeSwitch) => {
+  const [toggle, setToggle] = useState(localStorage.getItem('theme') === 'dark' ? true : false);
   const [colorTheme, setTheme] = useDarkMode();
   const toggleClass = "transform translate-x-5";
   const handleClick = () => {
-    darkMode.darkMode ? setTheme(colorTheme) : ''
+    isDarkModeSwitch.isDarkModeSwitch ? setTheme(colorTheme) : ''
     setToggle(!toggle);
   }
 
