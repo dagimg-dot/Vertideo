@@ -22,8 +22,8 @@ const Provider = () => {
       <Toaster />
       <div className="flex flex-col h-full">
         <main>
-          <div className="flex justify-between w-full p-4 text-[26px] mb-8 items-center fixed top-0 bg-[#101115]">
-            <h1>Providers</h1>
+          <div className="flex justify-between w-full p-4 text-[26px] mb-8 items-center fixed top-0 bg-white dark:bg-[#101115] ">
+            <h1 className="text-[#101115] dark:text-white">Providers</h1>
             <div onClick={toggleSettingsModal} ref={settingBtn}>
               <SettingsIcon />
             </div>
