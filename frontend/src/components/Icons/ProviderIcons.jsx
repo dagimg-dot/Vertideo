@@ -55,11 +55,11 @@ const SettingsIcon = ({ color }) => {
   return (
     <svg
       // fill={color || "white"}
-      fill="none"
+      // fill="none"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke={color || "white"}
-      className="w-8 h-8"
+      className="w-8 h-8 fill-current text-white dark:text-dark"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
