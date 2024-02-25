@@ -3,11 +3,16 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: 'class',
   theme: {
+    extend: {
     fill : theme => ({
       'black' : theme('colors.black'),
       'white' : theme('colors.white'),
     }),
-    extend: {},
+    stroke : theme => ({
+      'black' : theme('colors.black'),
+      'white' : theme('colors.white'),
+    }),
+  },
   },
   plugins: [],
 };
