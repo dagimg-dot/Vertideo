@@ -54,7 +54,7 @@ export const SearchIcon = ({ solid }) => {
   );
 };
 
-export const FeedIcon = ({ solid }) => {
+export const FeedIcon = ({ className,solid }) => {
   if (solid) {
     return (
       <svg
