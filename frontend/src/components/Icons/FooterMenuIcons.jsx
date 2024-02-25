@@ -1,4 +1,4 @@
-export const ProviderIcon = ({ color, solid }) => {
+export const ProviderIcon = ({ solid }) => {
   if (solid) {
     return (
       <svg
@@ -26,7 +26,7 @@ export const ProviderIcon = ({ color, solid }) => {
   );
 };
 
-export const SearchIcon = ({ color, solid }) => {
+export const SearchIcon = ({ solid }) => {
   if (solid) {
     return (
       <svg
@@ -54,7 +54,7 @@ export const SearchIcon = ({ color, solid }) => {
   );
 };
 
-export const FeedIcon = ({ color, solid, className }) => {
+export const FeedIcon = ({ solid }) => {
   if (solid) {
     return (
       <svg
