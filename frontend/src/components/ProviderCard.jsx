@@ -41,7 +41,7 @@ const ProviderCard = ({ id, foldername, hostname, port }) => {
 
   return (
     <div
-      className="flex justify-between bg-[#181f21] p-4 rounded-lg items-center shadow-md"
+      className="flex justify-between text-black dark:text-white bg-white dark:bg-[#181f21] p-4 rounded-lg items-center shadow-lg dark:shadow-md "
       onClick={handleCardClick}
     >
       <div>
