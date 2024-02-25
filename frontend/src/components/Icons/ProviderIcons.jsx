@@ -54,12 +54,9 @@ const DeleteIcon = ({ color }) => {
 const SettingsIcon = ({ color }) => {
   return (
     <svg
-      // fill={color || "white"}
-      // fill="none"
+      fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke={color || "white"}
-      className="w-8 h-8 fill-current text-white dark:text-dark"
+      className="w-8 h-8 stroke-current stroke-[1.5] text-black dark:text-white"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
