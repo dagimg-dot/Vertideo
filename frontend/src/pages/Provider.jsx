@@ -20,15 +20,15 @@ const Provider = () => {
   return (
     <Default>
       <Toaster />
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full bg-white dark:bg-[#101115]">
         <main>
-          <div className="flex justify-between w-full p-4 text-[26px] mb-8 items-center fixed top-0 bg-white dark:bg-[#101115] ">
+          <div className="flex justify-between w-full p-4 text-[26px] mb-8 items-center fixed top-0 bg-white dark:bg-[#101115] border-b-[0.5px] border-[#bcbcbc]">
             <h1 className="text-[#101115] dark:text-white">Providers</h1>
             <div onClick={toggleSettingsModal} ref={settingBtn}>
               <SettingsIcon/>
             </div>
           </div>
-          <div className="flex flex-col gap-4 my-24 px-4 ">
+          <div className="flex flex-col gap-4 my-24 px-4">
             {providers.length !== 0 ? (
               providers.map((provider) => (
                 <ProviderCard key={provider.id} {...provider} />
