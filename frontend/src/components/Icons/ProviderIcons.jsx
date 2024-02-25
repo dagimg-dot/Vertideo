@@ -51,7 +51,7 @@ const DeleteIcon = ({ color }) => {
   );
 };
 
-const SettingsIcon = ({ color }) => {
+const SettingsIcon = () => {
   return (
     <svg
       fill="none"
