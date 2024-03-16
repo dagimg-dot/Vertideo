@@ -1,5 +1,5 @@
 export const Heart = (props) => (
-  <svg width={40} height={40} viewBox="8 8 40 40" fill="none" {...props}>
+  <svg width={40} height={40} viewBox="8 8 40 40" fill="none" stroke={props.fill} {...props} >
     <path
       fillRule="evenodd"
       clipRule="evenodd"
