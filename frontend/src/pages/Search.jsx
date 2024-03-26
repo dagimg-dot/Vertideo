@@ -18,12 +18,12 @@ const Search = () => {
 
   return (
     <Default>
-      <div className=" w-full fixed top-0 bg-[#101115] px-4 py-4">
+      <div className=" w-full fixed top-0 bg-white dark:bg-[#101115] px-4 py-4 border-b-[0.5px] border-[#bcbcbc]">
         <input
           type="text"
           value={searchToken}
           onChange={(event) => setSearchToken(event.target.value)}
-          className="w-full placeholder:opacity-40"
+          className="w-full placeholder:opacity-40 border-2 border-[#101115] dark:border-[#bbb]"
           placeholder="Search your videos . . ."
         />
       </div>
