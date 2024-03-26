@@ -9,7 +9,7 @@ export const Heart = (props) => (
 );
 
 export const Separator = () => {
-  return <div className="bg-white w-[4px] h-[20px] rounded-lg"></div>;
+  return <div className="bg-[#101115] dark:bg-white w-[4px] h-[20px] rounded-lg"></div>;
 };
 
 export const Share = (props) => (
