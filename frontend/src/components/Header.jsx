@@ -12,18 +12,18 @@ const Header = () => {
   };
 
   return (
-    <header className="text-white absolute top-0 z-10 flex items-center w-full p-6 bottom-0 h-8 bg-gradient-to-b from-[#101115] to-transparent">
+    <header className="dark:text-white text-[#101115] absolute top-0 z-10 flex items-center w-full p-6 bottom-0 h-8 bg-white dark:bg-[#101115] dark:bg-gradient-to-b from-[#101115] to-transparent">
       <nav className="flex items-center gap-4 pointer-events-auto absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
         <span
           onClick={handleClick}
-          className={isFavouriteClicked ? "" : "text-white font-bold"}
+          className={isFavouriteClicked ? "" : "dark:text-white text-[#101115] font-bold"}
         >
           All
         </span>
         <Separator />
         <span
           onClick={handleClick}
-          className={isFavouriteClicked ? "text-white font-bold" : ""}
+          className={isFavouriteClicked ? "dark:text-white text-[#101115] font-bold" : ""}
         >
           Favorites
         </span>
