@@ -23,11 +23,12 @@ input:focus {
 }
 
 input[type=text] {
-    background-color: #181f21;
-    border: 2px solid #bbb;
+    /* background-color: #181f21; */
+    /* border: 2px solid #bbb; */
+    /* border:2px solid #181f21; */
     border-radius: 8px;
     padding: 8px 16px;
-    color: #bbb;
+    /* color: #bbb; */
     margin-top: 6px;
 }
 
