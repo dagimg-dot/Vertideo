@@ -1,5 +1,5 @@
 export const Heart = (props) => (
-  <svg width={40} height={40} viewBox="8 8 40 40" fill="none" {...props}>
+  <svg width={40} height={40} viewBox="8 8 40 40" fill="none" stroke={props.fill} {...props} >
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -9,7 +9,7 @@ export const Heart = (props) => (
 );
 
 export const Separator = () => {
-  return <div className="bg-white w-[4px] h-[20px] rounded-lg"></div>;
+  return <div className="bg-[#101115] dark:bg-white w-[4px] h-[20px] rounded-lg"></div>;
 };
 
 export const Share = (props) => (

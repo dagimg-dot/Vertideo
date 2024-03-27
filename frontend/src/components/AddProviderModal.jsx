@@ -118,7 +118,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
   };
 
   return (
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-6 bg-[#181f21] rounded-lg text-lg text-[#bbb] shadow-lg shadow-black">
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-6 bg-white dark:bg-[#181f21] rounded-lg text-lg text-[#181f21] dark:text-[#bbb] shadow-lg shadow-black">
       <form className="flex flex-col gap-4" onSubmit={handleSaveClick}>
         <div>
           <label>Hostname</label>
@@ -127,7 +127,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
             name="hostname"
             value={formData.hostname}
             placeholder="192.168.1.5"
-            className=" placeholder:opacity-40"
+            className=" placeholder:opacity-40 border-2 border-[#181f21] dark:border-[#bbb] bg-white dark:bg-[#181f21]"
             onChange={handleChange}
           />
           {formErrors.hostname && <Error message={formErrors.hostname} />}
@@ -139,7 +139,7 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
             name="port"
             value={formData.port}
             placeholder="8081"
-            className=" placeholder:opacity-40"
+            className=" placeholder:opacity-40 border-2 border-[#181f21] dark:border-[#bbb] bg-white dark:bg-[#181f21] "
             onChange={handleChange}
           />
           {formErrors.port && <Error message={formErrors.port} />}
@@ -151,14 +151,14 @@ const AddProviderModal = ({ toggleModal, _formData }) => {
             name="foldername"
             value={formData.foldername}
             placeholder="Videos"
-            className=" placeholder:opacity-40"
+            className=" placeholder:opacity-40 border-2 border-[#181f21] dark:border-[#bbb] bg-white dark:bg-[#181f21]"
             onChange={handleChange}
           />
           {formErrors.foldername && <Error message={formErrors.foldername} />}
         </div>
         <div className="flex justify-between mt-6">
           <button
-            className=" border-2 border-[#bbb] px-4 py-2 rounded-lg"
+            className=" border-2 border-[#181f21] dark:border-[#bbb] px-4 py-2 rounded-lg"
             onClick={toggleModal}
           >
             Cancel

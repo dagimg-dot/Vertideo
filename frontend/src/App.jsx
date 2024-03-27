@@ -3,8 +3,14 @@ import Feed from "./pages/Feed";
 import Provider from "./pages/Provider";
 import Search from "./pages/Search";
 import { GlobalProvider } from "./store/store";
+import useDarkMode from "./hooks/useDarkMode";
+import { useEffect } from "react";
 
 const App = () => {
+
+  const root = window.document.documentElement
+  root.classList.add(localStorage.getItem('theme'))
+  
   return (
     <GlobalProvider>
       <Routes>

@@ -9,7 +9,7 @@ const SettingsModal = ({ toggleModal, btnRef }) => {
   return (
     <div
       ref={settingRef}
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-[#181f21] rounded-lg text-lg shadow-md dark:shadow-lg shadow-black w-3/4"
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-[#181f21] rounded-lg text-lg shadow-custom dark:shadow-lg shadow-black w-3/4"
     >
       <div className="flex flex-col p-4 text-black dark:text-[#bbb]">
         <div className="text-center">
