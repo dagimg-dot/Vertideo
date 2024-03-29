@@ -7,10 +7,11 @@ import useDarkMode from "./hooks/useDarkMode";
 import { useEffect } from "react";
 
 const App = () => {
+  const root = window.document.documentElement;
+  localStorage.getItem("theme") === null
+    ? root.classList.add("Dark")
+    : root.classList.add(localStorage.getItem("theme"));
 
-  const root = window.document.documentElement
-  root.classList.add(localStorage.getItem('theme'))
-  
   return (
     <GlobalProvider>
       <Routes>
